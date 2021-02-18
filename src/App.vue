@@ -23,7 +23,7 @@
           <div
             id="profile"
             v-bind:class="[
-              'w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl opacity-75 mx-6 lg:mx-0',
+              'w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl opacity-95 mx-6 lg:mx-0',
               nightMode ? 'bg-gray-900' : 'bg-white'
             ]"
           >
@@ -71,7 +71,7 @@
                     ]"
                 /></span>
 
-                {{ data.profile.location }} -
+                {{ data.profile.location }}
                 <!-- {{ data.profile.coordinates.latitude }}° N, -->
                 <!-- {{ data.profile.coordinates.longitude }}° W -->
               </p>
