@@ -72,8 +72,8 @@
                 /></span>
 
                 {{ data.profile.location }} -
-                {{ data.profile.coordinates.latitude }}° N,
-                {{ data.profile.coordinates.longitude }}° W
+                <!-- {{ data.profile.coordinates.latitude }}° N, -->
+                <!-- {{ data.profile.coordinates.longitude }}° W -->
               </p>
               <p class="pt-8 text-sm">
                 {{ data.profile.description }}
