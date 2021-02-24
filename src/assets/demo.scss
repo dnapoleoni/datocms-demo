@@ -1,0 +1,155 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Work+Sans:wght@300;400;600;700&display=swap');
+$font-fancy: "Crimson Text", Helvetica, Arial, sans-serif;
+$font-plain: "Work Sans", Helvetica, Arial, sans-serif;
+
+/* colours */
+$colour-bg: snow;
+$colour-primary: darkslategray;
+$colour-secondary: #97A5A5; // cadet grey
+$colour-faint: #E5E5E5; // platinum
+$colour-highlight: orangered;
+
+/* borders */
+$border-primary: 1px dashed $colour-primary;
+$border-faint: 1px dashed $colour-faint;
+$border-highlight: 1px dashed $colour-highlight;
+
+/* breakpoints */
+$break-mobile: 600px;
+
+body {
+    margin:0;
+    padding:0;
+    width: 100vw;
+    min-width: 400px;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    font-size: 16px;
+    line-height: 24px;
+    overflow-x: hidden;
+    position: absolute;
+    font-family: $font-fancy;
+    background-color: $colour-bg;
+    color: $colour-primary;
+   
+    /* links */
+    a {
+        color: $colour-highlight;
+        text-decoration: none;
+        padding: 4px 0px;
+        border-bottom: $border-faint;
+
+        &:hover {
+            color: $colour-primary;
+            border-bottom: $border-primary ;
+            transition: 0.3s;
+        }
+    }
+
+    /* body inner */
+    section{
+        width: 100%;
+        padding: 3rem;
+        box-sizing: border-box;
+        font-weight: 400;
+
+        /* top bar */
+        header {
+            font-weight: 700;
+            font-size: 3.4vmax;
+            line-height: 6vmax;
+            border-bottom: $border-primary;
+            display:flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+
+            /* title */
+            h1 {
+                margin: 2rem 2rem 2rem 0;
+                font-weight: 700;
+            }
+
+            /* image */
+            & > div {
+                &:last-child {
+                    .profile-pic {
+                        width: 20vw;
+                        height:20vw;
+                        border: $border-faint;
+                        border-radius: 10vw;
+                    }
+
+                    @media only screen and (max-width: $break-mobile) {
+                        display:none;
+                    }
+                }
+            }
+        }
+
+        /* content */
+        main {
+            display:block;
+            height: auto;
+            width: auto;
+            padding: 2rem 0;
+            font-family: $font-plain;
+
+            /* each section */
+            article {
+                overflow:hidden;
+                margin-bottom: 2rem;
+                
+                /* title */
+                h2 {
+                    font-weight: 500;
+                    font-size: 1.8rem;
+                    font-family: $font-plain;
+                    margin: 1rem 0;
+                }
+
+                /* content */
+                & > div {
+                    display:flex;
+                    flex-wrap:wrap;
+                    margin-left: -20px;
+                    padding-bottom: 2px;
+
+                    /* mobile */
+                    @media only screen and (max-width: $break-mobile) {
+                        flex-direction:column;
+                        margin-left: 0;
+                    }
+
+                    /* row */
+                    & > div {
+                        white-space: nowrap;
+                        margin:10px 15px 0 0;
+
+                        /* mobile */
+                        @media only screen and (max-width: $break-mobile) {
+                            white-space: initial;
+                        }
+
+                        /* separators */
+                        &:before {
+                            content: "";
+                            display:inline-block;
+                            width: 5px;
+                            height: 5px;
+                            background-color: $colour-secondary;
+                            border-radius: 5px;
+                            margin: 2px 15px 2px 0;
+                        }
+                    }        
+                }
+            }
+        }
+    }
+}
+
+
+
+

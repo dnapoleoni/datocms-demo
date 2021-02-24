@@ -1,142 +1,127 @@
 <template>
   <div v-if="data">
-    <div
-      v-bind:class="[
-        'bg-cover fixed top-0 right-0 bottom-0 left-0 font-sans antialiased leading-normal',
-        nightMode ? 'text-gray-100' : 'text-gray-900',
-        nightMode ? 'text-gray-100' : 'text-gray-900'
-      ]"
-      v-bind:style="{
-        backgroundImage: `url('${data.theme.backgroundImage.responsiveImage.base64}')`
-      }"
-    >
-      <div
-        class="bg-cover fixed top-0 right-0 bottom-0 left-0"
-        v-bind:style="{
-          backgroundImage: `url('${data.theme.backgroundImage.url}')`
-        }"
-      >
-        <div
-          class="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0"
-        >
-          <!--Main Col-->
-          <div
-            id="profile"
-            v-bind:class="[
-              'w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl opacity-95 mx-6 lg:mx-0',
-              nightMode ? 'bg-gray-900' : 'bg-white'
-            ]"
-          >
-            <div class="p-4 md:p-12 text-center lg:text-left">
-              <!-- Image for mobile view-->
-              <div class="block lg:hidden">
-                <datocms-image
-                  class="rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center"
-                  :data="data.profile.photo.mobileImage"
-                />
-              </div>
-
-              <h1 class="text-3xl font-bold pt-8 lg:pt-0">
-                {{ data.profile.name }}
-              </h1>
-              <div
-                v-bind:class="[
-                  'mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 opacity-25',
-                  `border-${data.theme.color}-500`
-                ]"
-              ></div>
-              <p
-                class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start"
+    <section>
+      <header>
+        <div>
+          <h1>{{ data.profile.name }}<br />{{ data.profile.profession }}</h1>
+        </div>
+        <div>
+          <datocms-image
+            class="profile-pic"
+            :data="data.profile.photo.desktopImage"
+          />
+        </div>
+      </header>
+      <main>
+        <article>
+          <h2>Skills</h2>
+          <div role="list">
+            <div role="listitem"><span>HTML / CSS / JS / ES6</span></div>
+            <div role="listitem">
+              <span
+                ><a href="https://greensock.com/gsap/" target="_blank">GSAP</a>
+                / <a href="https://jquery.com" target="_blank">jQuery</a> /
+                <a href="https://handlebarsjs.com" target="_blank">Handlebars</a></span
               >
-                <span class="pr-4"
-                  ><font-awesome-icon
-                    icon="briefcase"
-                    v-bind:class="[
-                      'h-4 fill-current',
-                      `text-${data.theme.color}-700`
-                    ]"
-                /></span>
-
-                {{ data.profile.profession }}
-              </p>
-              <p
-                class="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start"
+            </div>
+            <div role="listitem">
+              <span
+                ><a href="https://vuejs.org" target="_blank">Vue.js</a> /
+                <a href="https://gulpjs.com" target="_blank">Gulp</a> /
+                <a href="https://nodejs.org/en/" target="_blank">Node</a> /
+                <a href="https://www.npmjs.com" target="_blank">NPM</a></span
               >
-                <span class="pr-4"
-                  ><font-awesome-icon
-                    icon="globe"
-                    v-bind:class="[
-                      'h-4 fill-current',
-                      `text-${data.theme.color}-700`
-                    ]"
-                /></span>
-
-                {{ data.profile.location }}
-                <!-- {{ data.profile.coordinates.latitude }}° N, -->
-                <!-- {{ data.profile.coordinates.longitude }}° W -->
-              </p>
-              <p class="pt-8 text-sm">
-                {{ data.profile.description }}
-              </p>
-
-              <div class="pt-12 pb-8">
-                <a
-                  v-bind:href="`mailto:${data.profile.email}`"
-                  class=""
-                  v-bind:class="[
-                    'text-white font-bold py-2 px-4 rounded-full',
-                    `bg-${data.theme.color}-700`,
-                    `hover:bg-${data.theme.color}-900`
-                  ]"
-                >
-                  Get In Touch
-                </a>
-              </div>
-
-              <div
-                class="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-center lg:justify-start"
+            </div>
+            <div role="listitem">
+              <span
+                >Dynamic HTML5 Banners +(<a href="https://webdesigner.withgoogle.com" target="_blank">GWD</a>,
+                <a href="https://www.adobe.com/au/products/animate.html" target="_blank">Animate</a>,
+                <a href="https://displayvideo.google.com" target="_blank">DV360</a>)</span
               >
-                <a
-                  v-for="profile in data.socials"
-                  class="link"
-                  v-bind:href="profile.url"
-                  :key="profile.social"
-                >
-                  <font-awesome-icon
-                    :icon="['fab', profile.social]"
-                    size="2x"
-                    class=""
-                    v-bind:class="[
-                      'fill-current text-gray-600 ml-3 mr-3 lg:ml-0 lg:mr-5',
-                      `hover:text-${data.theme.color}-700`
-                    ]"
-                  />
-                </a>
-              </div>
+            </div>
+            <div role="listitem">
+              <span
+                >eDMs +(Template builds,
+                <a href="https://www.salesforce.com/au/products/marketing-cloud/overview/" target="_blank">Salesforce</a>)</span
+              >
+            </div>
+            <div role="listitem">
+              <span
+                >Microsite builds, some CI/CD (<a href="https://buddy.works" target="_blank"
+                  >Buddy</a
+                >), AWS (<a href="https://aws.amazon.com/s3" target="_blank">S3</a>)</span
+              >
+            </div>
+            <div role="listitem">
+              <span
+                ><a href="https://www.atlassian.com/software/jira" target="_blank">JIRA</a>, Version Control (<a
+                  href="https://www.atlassian.com/software/sourcetree"
+                  target="_blank"
+                  >Sourcetree</a
+                >), <a href="https://www.atlassian.com/software/confluence" target="_blank">Confluence</a></span
+              >
+            </div>
+            <div role="listitem">
+              <span
+                >Asset exporting &amp; optimisation (<a href="https://www.sketch.com" target="_blank"
+                  >Sketch</a
+                >, <a href="https://www.adobe.com/au/products/photoshop.html" target="_blank">Photoshop</a>)</span
+              >
+            </div>
+            <div role="listitem">
+              <span
+                >Alexa/Google Voice dev (<a href="https://www.voiceflow.com" target="_blank">VoiceFlow</a
+                >)</span
+              >
+            </div>
+            <div role="listitem">
+              <span
+                >Browser & eDM testing (<a href="https://www.browserstack.com" target="_blank"
+                  >Browserstack</a
+                >, <a href="https://www.litmus.com" target="_blank">Litmus</a>,
+                <a href="https://www.emailonacid.com" target="_blank">EoA</a>)</span
+              >
             </div>
           </div>
+        </article>
 
-          <div class="w-full lg:w-2/5">
-            <!-- Big profile image for side bar (desktop) -->
-            <datocms-image
-              :data="data.profile.photo.desktopImage"
-              class="rounded-none lg:rounded-lg shadow-2xl hidden lg:block"
-            />
-            <!-- Image from: http://unsplash.com/photos/MP0IUfwrn0A -->
+        <article>
+          <h2>Social</h2>
+          <div role="list">
+            <div role="listitem">
+              <a href="https://www.facebook.com/dnapoleoni" target="_blank"
+                >Facebook</a
+              >
+            </div>
+            <div role="listitem">
+              <a href="https://www.twitter.com/onefatman" target="_blank"
+                >Twitter</a
+              >
+            </div>
+            <div role="listitem">
+              <a
+                href="https://www.instagram.com/danielnapoleoni/"
+                target="_blank"
+                >Instagram</a
+              >
+            </div>
+            <div role="listitem">
+              <a
+                href="https://www.linkedin.com/in/daniel-napoleoni/"
+                target="_blank"
+                >LinkedIn</a
+              >
+            </div>
           </div>
+        </article>
+      </main>
+    </section>
 
-          <!-- Pin to top right corner -->
-          <div class="absolute top-0 right-0 h-12 w-18 p-4">
-            <button
-              class="js-change-theme focus:outline-none"
-              v-on:click="toggleDayNight"
-            >
-              {{ nightMode ? "☀️" : "🌙" }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!-- not in section -->
+    <!-- <datocms-image
+        class="profile-pic"
+        :data="data.profile.photo.desktopImage"
+      /> -->
   </div>
 </template>
 
@@ -149,13 +134,13 @@ export default {
   data() {
     return {
       nightMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
-      data: null
+      data: null,
     };
   },
   methods: {
     toggleDayNight() {
       this.nightMode = !this.nightMode;
-    }
+    },
   },
   metaInfo() {
     if (!this || !this.data) {
@@ -186,7 +171,7 @@ export default {
               longitude
             }
             photo {
-              desktopImage: responsiveImage(imgixParams: { w: 360, h: 540, fit: crop, crop: faces, auto: format }) {
+              desktopImage: responsiveImage(imgixParams: { w: 720, h: 1080, fit: crop, crop: faces, auto: format }) {
                 ...imageFields
               }
               mobileImage: responsiveImage(imgixParams: { w: 192, h: 192, fit: crop, crop: faces, auto: format }) {
@@ -224,8 +209,12 @@ export default {
           title
           base64
         }
-      `
+      `,
     });
-  }
+  },
 };
 </script>
+
+<style lang="scss">
+@import "assets/demo";
+</style>

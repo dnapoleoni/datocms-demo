@@ -14,7 +14,6 @@ import {
 import VueMeta from "vue-meta";
 
 import App from "./App.vue";
-import "./assets/tailwind.css";
 
 library.add(faBriefcase);
 library.add(faTwitter);
