@@ -4,6 +4,7 @@
       <header>
         <div>
           <h1>{{ data.profile.name }}<br />{{ data.profile.profession }}</h1>
+          <!-- <span>dnapoleoni&#64;gmail&#46;com</span> -->
         </div>
         <div>
           <datocms-image
@@ -15,106 +16,50 @@
       <main>
         <article>
           <h2>Skills</h2>
-          <div role="list">
-            <div role="listitem"><span>HTML / CSS / JS / ES6</span></div>
-            <div role="listitem">
-              <span
-                ><a href="https://greensock.com/gsap/" target="_blank">GSAP</a>
-                / <a href="https://jquery.com" target="_blank">jQuery</a> /
-                <a href="https://handlebarsjs.com" target="_blank">Handlebars</a></span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                ><a href="https://vuejs.org" target="_blank">Vue.js</a> /
-                <a href="https://gulpjs.com" target="_blank">Gulp</a> /
-                <a href="https://nodejs.org/en/" target="_blank">Node</a> /
-                <a href="https://www.npmjs.com" target="_blank">NPM</a></span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                >Dynamic HTML5 Banners +(<a href="https://webdesigner.withgoogle.com" target="_blank">GWD</a>,
-                <a href="https://www.adobe.com/au/products/animate.html" target="_blank">Animate</a>,
-                <a href="https://displayvideo.google.com" target="_blank">DV360</a>)</span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                >eDMs +(Template builds,
-                <a href="https://www.salesforce.com/au/products/marketing-cloud/overview/" target="_blank">Salesforce</a>)</span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                >Microsite builds, some CI/CD (<a href="https://buddy.works" target="_blank"
-                  >Buddy</a
-                >), AWS (<a href="https://aws.amazon.com/s3" target="_blank">S3</a>)</span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                ><a href="https://www.atlassian.com/software/jira" target="_blank">JIRA</a>, Version Control (<a
-                  href="https://www.atlassian.com/software/sourcetree"
-                  target="_blank"
-                  >Sourcetree</a
-                >), <a href="https://www.atlassian.com/software/confluence" target="_blank">Confluence</a></span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                >Asset exporting &amp; optimisation (<a href="https://www.sketch.com" target="_blank"
-                  >Sketch</a
-                >, <a href="https://www.adobe.com/au/products/photoshop.html" target="_blank">Photoshop</a>)</span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                >Alexa/Google Voice dev (<a href="https://www.voiceflow.com" target="_blank">VoiceFlow</a
-                >)</span
-              >
-            </div>
-            <div role="listitem">
-              <span
-                >Browser & eDM testing (<a href="https://www.browserstack.com" target="_blank"
-                  >Browserstack</a
-                >, <a href="https://www.litmus.com" target="_blank">Litmus</a>,
-                <a href="https://www.emailonacid.com" target="_blank">EoA</a>)</span
-              >
-            </div>
-          </div>
+          <div><p>Stuff that I'm good at</p></div>
+          <ul role="list">
+
+            <li role="listitem"><span><b>core</b>: HTML / CSS / JS / ES6 / Node.js</span></li>
+            <li role="listitem"><span><b>libraries</b>: Vue.js / GSAP / jQuery / Handlebars</span></li>
+            <li role="listitem"><span><b>dev ops</b>: gulp / npm / aws S3 / CI/CD (Buddy)</span></li>
+            <li role="listitem"><span><b>BAU</b>: Dynamic HTML5 Banners, eDMs, microsites</span></li>
+            <li role="listitem"><span><b>voice</b>: Alexa & Google (VoiceFlow)</span></li>
+            <li role="listitem"><span><b>testing</b>: Browserstack, Litmus</span></li>
+          </ul>
         </article>
 
         <article>
           <h2>Social</h2>
-          <div role="list">
-            <div role="listitem">
+          <div><p>Check out the real me, no filter</p></div>
+          <ul role="list">
+            <li role="listitem">
               <a href="https://www.facebook.com/dnapoleoni" target="_blank"
                 >Facebook</a
               >
-            </div>
-            <div role="listitem">
+            </li>
+            <li role="listitem">
               <a href="https://www.twitter.com/onefatman" target="_blank"
                 >Twitter</a
               >
-            </div>
-            <div role="listitem">
+            </li>
+            <li role="listitem">
               <a
                 href="https://www.instagram.com/danielnapoleoni/"
                 target="_blank"
                 >Instagram</a
               >
-            </div>
-            <div role="listitem">
+            </li>
+            <li role="listitem">
               <a
                 href="https://www.linkedin.com/in/daniel-napoleoni/"
                 target="_blank"
                 >LinkedIn</a
               >
-            </div>
-          </div>
+            </li>
+          </ul>
         </article>
       </main>
+      <footer></footer>
     </section>
 
     <!-- not in section -->
@@ -171,7 +116,7 @@ export default {
               longitude
             }
             photo {
-              desktopImage: responsiveImage(imgixParams: { w: 720, h: 1080, fit: crop, crop: faces, auto: format }) {
+              desktopImage: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
                 ...imageFields
               }
               mobileImage: responsiveImage(imgixParams: { w: 192, h: 192, fit: crop, crop: faces, auto: format }) {

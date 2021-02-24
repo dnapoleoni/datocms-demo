@@ -16,20 +16,20 @@ $border-faint: 1px dashed $colour-faint;
 $border-highlight: 1px dashed $colour-highlight;
 
 /* breakpoints */
+$break-min: 400px;
 $break-mobile: 600px;
+$break-max: 1200px;
 
 body {
     margin:0;
     padding:0;
     width: 100vw;
-    min-width: 400px;
-    top: 0;
-    left: 0;
-    z-index: 0;
+    min-width: $break-min;
+    max-width: $break-max;
+    margin: 0 auto;
     font-size: 16px;
     line-height: 24px;
     overflow-x: hidden;
-    position: absolute;
     font-family: $font-fancy;
     background-color: $colour-bg;
     color: $colour-primary;
@@ -48,6 +48,14 @@ body {
         }
     }
 
+    /* resets */
+    ul, h1, p {
+        margin-block: 0;
+        margin-inline: 0;
+        list-style-type: none;
+        padding-inline: 0;
+    }
+
     /* body inner */
     section{
         width: 100%;
@@ -57,19 +65,33 @@ body {
 
         /* top bar */
         header {
-            font-weight: 700;
-            font-size: 3.4vmax;
-            line-height: 6vmax;
-            border-bottom: $border-primary;
             display:flex;
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
+            border-bottom: $border-primary;
+            padding-bottom: 1rem;
+
+            /* mobile */
+            @media only screen and (max-width: $break-mobile) {
+                justify-content: start;
+            }
 
             /* title */
             h1 {
-                margin: 2rem 2rem 2rem 0;
                 font-weight: 700;
+                font-size: 4.5vmax;
+                line-height: 5vmax;
+                margin: 2rem 2rem 0 0;
+            }
+
+            /* subtitle */
+            span {
+                font-size: 1rem;
+                color: $colour-secondary;
+                font-family: $font-plain;
+                font-weight: 400;
+                
             }
 
             /* image */
@@ -110,8 +132,17 @@ body {
                     margin: 1rem 0;
                 }
 
-                /* content */
+                /* description */
                 & > div {
+                    margin-bottom: 1rem;
+
+                    & > p {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                /* list */
+                & > ul {
                     display:flex;
                     flex-wrap:wrap;
                     margin-left: -20px;
@@ -119,12 +150,13 @@ body {
 
                     /* mobile */
                     @media only screen and (max-width: $break-mobile) {
-                        flex-direction:column;
+                        // flex-direction:column;
                         margin-left: 0;
+
                     }
 
                     /* row */
-                    & > div {
+                    & > li {
                         white-space: nowrap;
                         margin:10px 15px 0 0;
 
@@ -133,15 +165,17 @@ body {
                             white-space: initial;
                         }
 
-                        /* separators */
-                        &:before {
-                            content: "";
-                            display:inline-block;
-                            width: 5px;
-                            height: 5px;
-                            background-color: $colour-secondary;
-                            border-radius: 5px;
-                            margin: 2px 15px 2px 0;
+                        /* separators on desktop */
+                        @media only screen and (min-width: $break-mobile) {
+                            &:before {
+                                content: "";
+                                display:inline-block;
+                                width: 5px;
+                                height: 5px;
+                                background-color: $colour-secondary;
+                                border-radius: 5px;
+                                margin: 2px 15px 2px 0;
+                            }
                         }
                     }        
                 }
@@ -149,7 +183,3 @@ body {
         }
     }
 }
-
-
-
-
