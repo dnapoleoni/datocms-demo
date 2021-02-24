@@ -22,9 +22,9 @@
             <li role="listitem"><span><b>core</b>: HTML / CSS / JS / ES6 / Node.js</span></li>
             <li role="listitem"><span><b>libraries</b>: Vue.js / GSAP / jQuery / Handlebars</span></li>
             <li role="listitem"><span><b>dev ops</b>: gulp / npm / aws S3 / CI/CD (Buddy)</span></li>
-            <li role="listitem"><span><b>BAU</b>: Dynamic HTML5 Banners, eDMs, microsites</span></li>
-            <li role="listitem"><span><b>voice</b>: Alexa & Google (VoiceFlow)</span></li>
-            <li role="listitem"><span><b>testing</b>: Browserstack, Litmus</span></li>
+            <li role="listitem"><span><b>BAU</b>: Dynamic HTML5 Banners / eDMs / microsites</span></li>
+            <li role="listitem"><span><b>voice</b>: Alexa &amp; Google (VoiceFlow)</span></li>
+            <li role="listitem"><span><b>testing</b>: Browserstack / Litmus</span></li>
           </ul>
         </article>
 
