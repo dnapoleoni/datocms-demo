@@ -59,14 +59,19 @@
           </ul>
         </article>
       </main>
-      <footer></footer>
+      <footer>
+        <span>Powered by   <a
+                href="https://www.vuejs.org"
+                target="_blank"
+                >Vue.js,</a>   <a
+                href="https://www.datocms.com"
+                target="_blank"
+                >DatoCMS</a> and   <a
+                href="https://www.netlify.com"
+                target="_blank"
+                >Netlify</a></span>
+      </footer>
     </section>
-
-    <!-- not in section -->
-    <!-- <datocms-image
-        class="profile-pic"
-        :data="data.profile.photo.desktopImage"
-      /> -->
   </div>
 </template>
 

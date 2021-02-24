@@ -59,9 +59,12 @@ body {
     /* body inner */
     section{
         width: 100%;
-        padding: 3rem;
+        min-height: 100vh;
+        padding: 3rem 3rem 0 3rem;
         box-sizing: border-box;
         font-weight: 400;
+        display:flex;
+        flex-direction: column;
 
         /* top bar */
         header {
@@ -71,6 +74,7 @@ body {
             align-items: center;
             border-bottom: $border-primary;
             padding-bottom: 1rem;
+            flex-shrink: 0;
 
             /* mobile */
             @media only screen and (max-width: $break-mobile) {
@@ -116,8 +120,9 @@ body {
             display:block;
             height: auto;
             width: auto;
-            padding: 2rem 0;
+            padding: 2rem 0 0;
             font-family: $font-plain;
+            flex-grow: 1;
 
             /* each section */
             article {
@@ -150,7 +155,7 @@ body {
 
                     /* mobile */
                     @media only screen and (max-width: $break-mobile) {
-                        // flex-direction:column;
+                        flex-direction:column;
                         margin-left: 0;
 
                     }
@@ -181,5 +186,12 @@ body {
                 }
             }
         }
+    }
+
+    footer {
+        font-size: 0.8rem;
+        text-align: center;
+        flex-shrink: 0;
+        padding: 1rem 0;
     }
 }
