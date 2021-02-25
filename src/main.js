@@ -30,6 +30,7 @@ Vue.use(DatocmsImagePlugin);
 Vue.use(VueMeta);
 
 Vue.config.productionTip = false;
+Vue.config.devtools = true;
 
 new Vue({
   router,
