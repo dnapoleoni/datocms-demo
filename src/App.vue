@@ -16,21 +16,41 @@
       <main>
         <article>
           <h2>Skills</h2>
-          <div><p>Stuff that I'm good at</p></div>
+          <div><p>Stuff I'm good at</p></div>
           <ul role="list">
 
             <li role="listitem"><span><b>core</b>: HTML / CSS / JS / ES6 / Node.js</span></li>
             <li role="listitem"><span><b>libraries</b>: Vue.js / GSAP / jQuery / Handlebars</span></li>
+            <li role="listitem"><span><b>BAU</b>: Dynamic Banners / eDMs / microsites</span></li>
             <li role="listitem"><span><b>dev ops</b>: gulp / npm / aws S3 / CI/CD (Buddy)</span></li>
-            <li role="listitem"><span><b>BAU</b>: Dynamic HTML5 Banners / eDMs / microsites</span></li>
             <li role="listitem"><span><b>voice</b>: Alexa &amp; Google (VoiceFlow)</span></li>
             <li role="listitem"><span><b>testing</b>: Browserstack / Litmus</span></li>
           </ul>
         </article>
 
         <article>
+          <h2>Experience</h2>
+          <div><p>Places I worked</p></div>
+          <ul role="list">
+
+            <li role="listitem"><span><b>2019 - now</b>: <a href="https://www.clemenger.com.au" target="_blank"
+                >Clemenger BBDO</a> (Myer / BMW / Belong / NAB)</span></li>
+                <li role="listitem"><span><b>2019 (freelance)</b>: <a href="https://www.cumminsandpartners.com" target="_blank"
+                >Cummins &amp; Partners</a> (Specsavers)</span></li>
+                 <li role="listitem"><span><b>2019 (freelance)</b>: <a href="https://www.trout.com.au" target="_blank"
+                >Trout</a> (Reece)</span></li>
+                <li role="listitem"><span><b>2018 (freelance)</b>: <a href="https://www.theroyals.com.au" target="_blank"
+                >The Royals</a> (Google / AusSuper / Athena)</span></li>
+            <li role="listitem"><span><b>2009 - 2017</b>: <a href="https://www.isobar.com/en-au" target="_blank"
+                >Isobar Australia</a> (Holden / AusPost / Jetstar)</span></li>
+                <li role="listitem"><span><b>2007 - 2008</b>: <a href="https://www.cer8ive.com.au" target="_blank"
+                >Cre8ive</a> (NADC / The Mint / FM104.7)</span></li>
+          </ul>
+        </article>
+
+        <article>
           <h2>Social</h2>
-          <div><p>Check out the real me, no filter</p></div>
+          <div><p>Real me, no filter</p></div>
           <ul role="list">
             <li role="listitem">
               <a href="https://www.facebook.com/dnapoleoni" target="_blank"
