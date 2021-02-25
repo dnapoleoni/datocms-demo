@@ -1,0 +1,21 @@
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Work+Sans:wght@300;400;600;700&display=swap');
+$font-fancy: "Crimson Text", Helvetica, Arial, sans-serif;
+$font-plain: "Work Sans", Helvetica, Arial, sans-serif;
+
+/* colours */
+$colour-bg: snow;
+$colour-primary: darkslategray;
+$colour-secondary: #97A5A5; // cadet grey
+$colour-faint: #E5E5E5; // platinum
+$colour-highlight: orangered;
+
+/* borders */
+$border-primary: 1px dashed $colour-primary;
+$border-faint: 1px dashed $colour-faint;
+$border-highlight: 1px dashed $colour-highlight;
+
+/* breakpoints */
+// $break-min: 400px;
+$break-mobile: 600px;
+$break-max: 1200px;
