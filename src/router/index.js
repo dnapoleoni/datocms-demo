@@ -1,5 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Home from '@/views/Home.vue'
+import Project from '@/views/Project.vue'
+import FormSuccess from '@/views/FormSuccess.vue'
+import FormFailure from '@/views/FormFailure.vue'
 
 Vue.use(VueRouter)
 
@@ -10,7 +14,7 @@ const routes = [
         meta: {
             title: 'Home'
         },
-        component: () => import('../views/Home.vue')
+        component: Home
     },
     {
         path: '/project/',
@@ -18,14 +22,24 @@ const routes = [
         meta: {
             title: 'Project'
         },
-        component: () => import('../views/Project.vue')
+        component: Project
+    },
+    {
+        path: '/cheers',
+        name: 'success',
+        component: FormSuccess
+    },
+    {
+        path: '/uh-oh',
+        name: 'failure',
+        component: FormFailure
     },
     {
         path: '*',
         redirect: {
             name: 'home'
-        }
-    }
+        },
+    },
 ]
 
 export default new VueRouter({

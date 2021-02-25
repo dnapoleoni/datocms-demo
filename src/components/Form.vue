@@ -1,6 +1,7 @@
 <template>
-    <form ref="contact">
+    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
         <!-- <sup class="input-error-message" v-if="errors.length > 0" v-html="errors[0]"></sup> -->
+        <input type="hidden" name="form-name" value="cv-contact" />
         <div>
             <label for="fname">Name:</label>
             <input id="fname" name="Enter your name" />

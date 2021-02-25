@@ -13,5 +13,13 @@
     </noscript>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+
+    <!-- hidden form for netlify prerender -->-->
+    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
+      <input id="fname" name="Enter your name" />
+      <input id="email" name="Enter your email address" />
+      <input id="phone" name="Enter your phone number" />
+      <textarea id="message" class="message" name="Leave a message"></textarea>
+    </form>
   </body>
 </html>
