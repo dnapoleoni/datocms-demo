@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
     name: "Form",
     data() {
@@ -34,16 +35,17 @@ export default {
         };
     },
     methods: {
-    handleSubmit () {
-      fetch('/')
-      .then(() => {
-        this.$router.push('cheers')
-      })
-      .catch(() => {
-        this.$router.push('uh-oh')
-      })
+        handleSubmit () {
+            axios.post('/', {
+        })
+        .then(() => {
+            this.$router.push('cheers')
+        })
+        .catch(() => {
+            this.$router.push('uh-oh')
+        })
+        }
     }
-  }
 }
 </script>
 
