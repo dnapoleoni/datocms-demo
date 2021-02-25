@@ -1,5 +1,5 @@
 <template>
-    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
         <!-- <sup class="input-error-message" v-if="errors.length > 0" v-html="errors[0]"></sup> -->
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
@@ -32,7 +32,18 @@ export default {
         return {
         data: null,
         };
+    },
+    methods: {
+    handleSubmit () {
+      fetch('/')
+      .then(() => {
+        this.$router.push('cheers')
+      })
+      .catch(() => {
+        this.$router.push('uh-oh')
+      })
     }
+  }
 }
 </script>
 
