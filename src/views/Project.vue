@@ -1,7 +1,7 @@
 <template>
-      <main v-if="data">
-        here is a project
-      </main> 
+    <main>
+      here is a project
+    </main> 
 </template>
 
 <script>

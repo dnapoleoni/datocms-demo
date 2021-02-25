@@ -105,7 +105,7 @@ export default {
                     @media only screen and (max-width: $break-mobile) {
                         width: auto;
                         height: auto;
-                        margin-top: 1rem;
+                        margin-top: 2rem;
                     }
                 }               
             }
