@@ -2,7 +2,6 @@
     
     <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
         <span>*required</span>
-        <!-- <sup class="input-error-message" v-if="errors.length > 0" v-html="errors[0]"></sup> -->
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
             <label for="name">Name:<span>*</span></label>
@@ -31,7 +30,6 @@
 </template>
 
 <script>
-// import axios from "axios";
 export default {
     name: "Form",
     data() {
@@ -57,9 +55,9 @@ export default {
             return formData;
         },
 
-        // This is our custom onSubmit function; don't forget to add `@submit.prevent="handleSubmit"` inside your <form> tag
+        // submit
         handleSubmit () {
-            // This `data` object is what's passed to the createFormDataObj function. It needs all of your form fields, where the key is the name= attribute and the value is the computed value.
+
             const data = {
                 "form-name": "cv-contact",
                 "name": this.data.name,
@@ -68,15 +66,11 @@ export default {
                 "message": this.data.message
             }
 
-            console.log(new URLSearchParams(this.createFormDataObj(data)).toString());
-            // This POSTs your encoded form to Netlify with the required headers (for text; headers will be different for POSTing a file) and, on success, redirects to the custom success page located at pages/thanks.vue
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
                 body: new URLSearchParams(this.createFormDataObj(data)).toString()
             })
-            // This is how we route to /thanks on successful form submission
-            // More on $router.push function: https://router.vuejs.org/guide/essentials/navigation.html
             .then(() => this.$router.push('cheers'))
             .catch(() => this.$router.push('uh-oh'))
         }

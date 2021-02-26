@@ -2,7 +2,7 @@
       <header v-if="data">
         <div>
           <h1>{{ data.profile.name }}<br />{{ data.profile.profession }}</h1>
-          <span>{{ data.profile.email }}</span>
+          <span>{{ data.profile.location }}</span>
         </div>
         <div>
           <datocms-image
@@ -30,12 +30,12 @@ export default {
           profile {
             name
             profession
-            email
             photo {
               image: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
                 ...imageFields
               }
             }
+            location
           }
         }
         fragment imageFields on ResponsiveImage {
