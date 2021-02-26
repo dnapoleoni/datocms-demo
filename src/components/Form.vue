@@ -5,8 +5,8 @@
         <!-- <sup class="input-error-message" v-if="errors.length > 0" v-html="errors[0]"></sup> -->
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
-            <label for="fname">Name:<span>*</span></label>
-            <input id="fname" type="text" name="name" v-model="data.name" @blur="handleBlur" required/>
+            <label for="name">Name:<span>*</span></label>
+            <input id="name" type="text" name="name" v-model="data.name" @blur="handleBlur" required/>
             <span>what should i call you?</span>
         </div>
         <div>
