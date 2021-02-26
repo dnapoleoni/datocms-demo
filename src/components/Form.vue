@@ -6,22 +6,22 @@
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
             <label for="fname">Name:<span>*</span></label>
-            <input id="fname" type="text" name="Enter your name" v-model="data.name" @blur="handleBlur" required/>
+            <input id="fname" type="text" name="name" v-model="data.name" @blur="handleBlur" required/>
             <span>what should i call you?</span>
         </div>
         <div>
             <label for="email">Email:<span>*</span></label>
-            <input id="email" type="email" name="Enter your email address" v-model="data.email" @blur="handleBlur" required/>
+            <input id="email" type="email" name="email" v-model="data.email" @blur="handleBlur" required/>
             <span>e.g. 2kool@vanillaicemail.com</span>
         </div>
         <div>
             <label for="phone">Phone:</label>
-            <input id="phone" type="tel" name="Enter your phone number" pattern="^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3}$" v-model="data.phone" @blur="handleBlur"/>
+            <input id="phone" type="tel" name="phone" pattern="^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3}$" v-model="data.phone" @blur="handleBlur"/>
             <span>eg 0408008135</span>
         </div>
         <div>
             <label for="message">Message:<span>*</span></label>
-            <textarea id="message" type="text" name="Leave a message" v-model="data.message" @blur="handleBlur" required></textarea>
+            <textarea id="message" type="text" name="message" v-model="data.message" @blur="handleBlur" required></textarea>
             <span>hmm watcha saaay</span>
         </div>
         <div>
@@ -68,12 +68,12 @@ export default {
                 "message": this.data.message
             }
 
-            console.log(JSON.stringify(data));
+            console.log(new URLSearchParams(this.createFormDataObj(data)).toString());
             // This POSTs your encoded form to Netlify with the required headers (for text; headers will be different for POSTing a file) and, on success, redirects to the custom success page located at pages/thanks.vue
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: JSON.stringify(data)
+                body: new URLSearchParams(this.createFormDataObj(data)).toString()
             })
             // This is how we route to /thanks on successful form submission
             // More on $router.push function: https://router.vuejs.org/guide/essentials/navigation.html
