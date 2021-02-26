@@ -68,12 +68,12 @@ export default {
                 "message": this.data.message
             }
 
-            console.log(data);
+            console.log(JSON.stringify(data));
             // This POSTs your encoded form to Netlify with the required headers (for text; headers will be different for POSTing a file) and, on success, redirects to the custom success page located at pages/thanks.vue
             fetch("/", {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
-                body: new URLSearchParams(this.createFormDataObj(data)).toString()
+                body: JSON.stringify(data)
             })
             // This is how we route to /thanks on successful form submission
             // More on $router.push function: https://router.vuejs.org/guide/essentials/navigation.html
