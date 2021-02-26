@@ -1,49 +1,82 @@
 <template>
+    
     <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
+        <span>*required</span>
         <!-- <sup class="input-error-message" v-if="errors.length > 0" v-html="errors[0]"></sup> -->
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
-            <label for="fname">Name:</label>
-            <input id="fname" name="Enter your name" />
+            <label for="fname">Name:<span>*</span></label>
+            <input id="fname" type="text" name="Enter your name" v-model="data.name" @blur="handleBlur" required/>
+            <span>what should i call you?</span>
         </div>
         <div>
-            <label for="email">Email:</label>
-            <input id="email" name="Enter your email address" />
+            <label for="email">Email:<span>*</span></label>
+            <input id="email" type="email" name="Enter your email address" v-model="data.email" @blur="handleBlur" required/>
+            <span>e.g. 2kool@vanillaicemail.com</span>
         </div>
         <div>
             <label for="phone">Phone:</label>
-            <input id="phone" name="Enter your phone number" />
+            <input id="phone" type="tel" name="Enter your phone number" pattern="^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3}$" v-model="data.phone" @blur="handleBlur"/>
+            <span>eg 0408008135</span>
         </div>
         <div>
-            <label for="message">Message:</label>
-            <textarea id="message" class="message" name="Leave a message"></textarea>
+            <label for="message">Message:<span>*</span></label>
+            <textarea id="message" type="text" name="Leave a message" v-model="data.message" @blur="handleBlur" required></textarea>
+            <span>hmm watcha saaay</span>
         </div>
         <div>
            <button type="submit">Submit</button>
-           <button type="reset">Reset</button>
         </div>
     </form>
 </template>
 
 <script>
-import axios from "axios";
+// import axios from "axios";
 export default {
     name: "Form",
     data() {
         return {
-        data: null,
+            data: {
+                name: "",
+                email: "",
+                phone: "",
+                message: "",
+            },
         };
     },
     methods: {
+        handleBlur(e) {
+            e.target.classList.add("used")
+        },
+
+        createFormDataObj(data) {
+            const formData = new FormData();
+            for (const key of Object.keys(data)) {
+                formData.append(key, data[key]);
+            }
+            return formData;
+        },
+
+        // This is our custom onSubmit function; don't forget to add `@submit.prevent="handleSubmit"` inside your <form> tag
         handleSubmit () {
-            axios.post('/', {
-        })
-        .then(() => {
-            this.$router.push('cheers')
-        })
-        .catch(() => {
-            this.$router.push('uh-oh')
-        })
+            // This `data` object is what's passed to the createFormDataObj function. It needs all of your form fields, where the key is the name= attribute and the value is the computed value.
+            const data = {
+                "form-name": "cv-contact",
+                "name": this.name,
+                "email": this.email,
+                "phone": this.phone,
+                "message": this.message
+            }
+            // This POSTs your encoded form to Netlify with the required headers (for text; headers will be different for POSTing a file) and, on success, redirects to the custom success page located at pages/thanks.vue
+            fetch("/", {
+                method: "POST",
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(this.createFormDataObj(data)).toString()
+            })
+            // This is how we route to /thanks on successful form submission
+            // More on $router.push function: https://router.vuejs.org/guide/essentials/navigation.html
+            .then(() => this.$router.push('cheers'))
+            .catch(() => this.$router.push('uh-oh'))
         }
     }
 }
@@ -52,9 +85,22 @@ export default {
 <style lang="scss">
 form {
 
+    /* all error messages */
+    span {
+        font-size: 0.8rem;
+        color: $colour-highlight;
+    }
+
+    /* required legend */
+    & > span {
+        position:relative;
+        top:-0.8rem;
+    }
+
     & > div {
         display:flex;
         flex-direction:row;
+        position:relative;
 
         @media only screen and (max-width: $break-mobile) {
             flex-direction:column;
@@ -68,6 +114,14 @@ form {
         & > label {
             flex-shrink: 0;
             width: 6rem;
+
+            /* required asterisk */
+            & > span {
+                font-size: 0.6rem;
+                position:relative;
+                top: -0.5rem;
+                color: $colour-highlight;
+            }
         }
 
         & > input,
@@ -75,48 +129,57 @@ form {
         & > button {  
             flex-grow: 1;
             border: 0;
-            border-bottom: $border-faint;
-            background-color: transparent;
+            border: $border-primary;
+            background-color: $colour-white;
             padding: 0.4rem 1rem;
 
-            &.message {
-                height: 3rem;
+            &.used:invalid {
+                border: $border-highlight;
+                color: $colour-highlight;
+
+                & + span {
+                    display:inline-block;
+                }
             }
         }
 
+        & > textarea {
+            min-height: 3rem;
+            box-sizing:border-box;
+            resize:vertical;
+        }
+
         & > button {
-            border: $border-faint;
-            color: $colour-primary;
-            max-width: 10rem;
-            margin-right: 1rem;
-            cursor:pointer;
             height: 2.4rem;
+            max-width: 12rem;
+            color: $colour-bg;
+            background-color: $colour-primary;
+            cursor:pointer;
 
             &:hover {
-                background-color: $colour-faint;
+                background-color: $colour-highlight;
+                border: $border-faint   ;
                 transition: 0.3s;
-            }
-
-            /* first desktop button lhs gap to align with inputs */
-            &:first-child {
-                // margin-left: 5rem;
             }
 
             /* full width buttons on mobile */
             @media only screen and (max-width: $break-mobile) {
                 max-width: 100%;
-                margin-right: 0;
-
-                /* clear lhs padding on mobile too */
-                &:first-child {
-                    margin-left: 0;
-                }
             }
+        }
+
+        /* errors */
+        & > span {
+            position: absolute;
+            right: 0;
+            padding: 0.15rem 0.6rem;
+            font-size: 12px;
+            display:none;
         }
 
         /* buttons container only */
         &:last-child {
-            justify-content: center;
+            justify-content: flex-end;
         }
     }
 }
