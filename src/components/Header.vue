@@ -10,7 +10,9 @@
             :data="data.profile.photo.image"
           />
         </div>
-        <button v-if="!isHome" @click="$router.push('/home')">Back</button>
+        <button v-if="!isHome" @click="$router.push('/home')">                  
+          <font-awesome-icon icon="angle-left" />
+          <span>Back</span></button>
       </header>
 </template>
 
@@ -82,29 +84,30 @@ export default {
         }
 
         /* subtitle */
-        span {
-            font-size: 1rem;
-            color: $colour-secondary;
-            font-family: $font-plain;
-            font-weight: 400;
-        }
+        & > div {
+          span {
+              font-size: 1rem;
+              color: $colour-secondary;
+              font-family: $font-plain;
+              font-weight: 400;
+          }
 
-        /* image */
-        .profile-pic {
-            width: 20vw;
-            height: 20vw;
-            border: $border-faint;
-            border-radius: 50%;
-            max-height: 290px;
-            max-width: 290px;
+          /* image */
+          .profile-pic {
+              width: 20vw;
+              height: 20vw;
+              border: $border-faint;
+              border-radius: 50%;
+              max-height: 290px;
+              max-width: 290px;
 
-            @media only screen and (max-width: $break-mobile) {
-                width: auto;
-                height: auto;
-                margin-top: 2rem;
-            }
+              @media only screen and (max-width: $break-mobile) {
+                  width: auto;
+                  height: auto;
+                  margin-top: 2rem;
+              }
+          }
         }               
-
 
         button {
           position:absolute;
@@ -116,6 +119,17 @@ export default {
           padding: 0.4rem 2rem;
           margin-bottom: 1rem;
           margin-left: 0.4rem;
+          transition:0.3s;
+
+          & > svg {
+            margin-right: 0.2rem;
+          }
+
+          &:hover {
+            border: $border-faint !important;
+            background-color: $colour-primary !important;
+            color: $colour-bg !important;
+          }
         }
     }
 </style>

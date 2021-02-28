@@ -150,11 +150,11 @@ form {
             max-width: 12rem;
             color: $colour-bg;
             background-color: $colour-primary;
+            transition: 0.3s;
 
             &:hover {
                 background-color: $colour-highlight;
                 border: $border-faint;
-                transition: 0.3s;
             }
 
             /* full width buttons on mobile */
