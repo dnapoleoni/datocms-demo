@@ -17,7 +17,46 @@ export default {
         Item
     },
     props: {
-        data: Object
+        data: Object,
+        stacked: Boolean
     }
 }
 </script>
+
+<style lang="scss">
+    li {
+        white-space: nowrap;
+        margin: 0px 1rem 0.6rem 0;
+
+        & > p {
+            margin: 0.4rem 0 0.6rem;
+        }
+
+        /* mobile */
+        @media only screen and (max-width: $break-mobile) {
+            white-space: initial;
+        }
+
+        /* separators on desktop */
+        @media only screen and (min-width: $break-mobile) {
+            &:before {
+                content: "";
+                display:inline-block;
+                width: 5px;
+                height: 5px;
+                background-color: $colour-secondary;
+                border-radius: 5px;
+                margin: 2px 15px 2px 0;
+            }
+        }
+    }
+
+    /* stacked items */
+    .stack-list li {
+        white-space: initial;
+
+        &:before {
+            content: none;
+        }
+    }
+</style>

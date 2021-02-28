@@ -35,6 +35,14 @@ body {
         padding-inline: 0;
     }
 
+    /* title */
+    h2 {
+        font-weight: 500;
+        font-size: 1.8rem;
+        font-family: $font-plain;
+        margin: 1rem 0 2rem;
+    }
+
     /* body inner */
     section{
         width: 100%;
@@ -47,6 +55,17 @@ body {
 
         @media only screen and (max-width: $break-mobile) {
             padding: 2rem 2rem 0 2rem;
+        }
+
+        article {
+            /* description */
+            & > div {
+                margin-bottom: 0rem;
+  
+                & > p {
+                    margin-bottom: 1.5rem;
+                }
+            }
         }
     }
 }
