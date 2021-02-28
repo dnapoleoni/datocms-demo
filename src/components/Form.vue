@@ -150,11 +150,10 @@ form {
             max-width: 12rem;
             color: $colour-bg;
             background-color: $colour-primary;
-            cursor:pointer;
 
             &:hover {
                 background-color: $colour-highlight;
-                border: $border-faint   ;
+                border: $border-faint;
                 transition: 0.3s;
             }
 

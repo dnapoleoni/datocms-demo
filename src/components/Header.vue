@@ -10,6 +10,7 @@
             :data="data.profile.photo.image"
           />
         </div>
+        <button v-if="!isHome" @click="$router.push('/home')">Back</button>
       </header>
 </template>
 
@@ -22,6 +23,11 @@ export default {
     return {
       data: null,
     };
+  },
+  computed: {
+  isHome() {
+     return this.$route.name === 'home'
+    }
   },
   async mounted() {
     this.data = await request({
@@ -64,8 +70,9 @@ export default {
         justify-content: space-around;
         align-items: center;
         border-bottom: $border-primary;
-        padding-bottom: 1rem;
+        padding-bottom: 1.6rem;
         flex-shrink: 0;
+        position:relative;
 
         /* mobile */
         @media only screen and (max-width: $break-mobile) {
@@ -74,41 +81,41 @@ export default {
             text-align: center;
         }
 
-        /* title */
-        h1 {
-            font-weight: 700;
-            font-size: 4.5vmax;
-            line-height: 5vmax;
-            margin-top: 2rem;
-        }
-
         /* subtitle */
         span {
             font-size: 1rem;
             color: $colour-secondary;
             font-family: $font-plain;
             font-weight: 400;
-            
         }
 
         /* image */
-        & > div {
-            &:last-child {
-                .profile-pic {
-                    width: 20vw;
-                    height: 20vw;
-                    border: $border-faint;
-                    border-radius: 50%;
-                    max-height: 290px;
-                    max-width: 290px;
+        .profile-pic {
+            width: 20vw;
+            height: 20vw;
+            border: $border-faint;
+            border-radius: 50%;
+            max-height: 290px;
+            max-width: 290px;
 
-                    @media only screen and (max-width: $break-mobile) {
-                        width: auto;
-                        height: auto;
-                        margin-top: 2rem;
-                    }
-                }               
+            @media only screen and (max-width: $break-mobile) {
+                width: auto;
+                height: auto;
+                margin-top: 2rem;
             }
+        }               
+
+
+        button {
+          position:absolute;
+          left: 0;
+          bottom: -2rem;
+          border: $border-primary !important;
+          background-color: $colour-bg !important;
+          color: $colour-primary !important;
+          padding: 0.4rem 2rem;
+          margin-bottom: 1rem;
+          margin-left: 0.4rem;
         }
     }
 </style>

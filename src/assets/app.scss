@@ -36,11 +36,27 @@ body {
     }
 
     /* title */
+    h1 {
+        font-weight: 700;
+        font-size: 4.5vmax;
+        line-height: 5vmax;
+        margin-top: 2rem;
+    }
+
+    /* title */
     h2 {
         font-weight: 500;
         font-size: 1.8rem;
         font-family: $font-plain;
         margin: 1rem 0 2rem;
+    }
+
+    button {
+        cursor:pointer;
+        background-color: $colour-primary;
+        color: $colour-white;
+        font-family: $font-plain;
+        border: 0;
     }
 
     /* body inner */

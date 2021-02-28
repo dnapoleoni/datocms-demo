@@ -1,86 +1,52 @@
 <template>
-    <main>
-      here is a project
+    <main v-if="data">
+      <div v-if="projectExists">
+        <h2>{{ this.data.project.title }}</h2>
+        <!-- <p>{{ data.client.name }}</p> -->
+      </div>
+      <div v-else>
+        <p>Sorry, that project doesn't seem to exist. Are you sure you meant to visit <b>{{ this.$route.params.slug }}</b>?</p>
+        <p>You can either double-check your spelling (we all typo, it's cool) or hit the 'back' button to head back to the homepage and click one of the links I prepared earlier.</p>
+      </div>
     </main> 
 </template>
 
 <script>
-// import { request } from "@/lib/datocms";
+import { request } from "@/lib/datocms";
 
 export default {
   name: "Project",
   data() {
     return {
       data: null,
+      projectExists: Boolean
     };
   },
-  // async mounted() {
-  //   this.data = await request({
-  //     query: `
-  //       {
-  //         site: _site {
-  //           favicon: faviconMetaTags {
-  //             ...metaTagsFragment
-  //           }
-  //         }
-  //         profile {
-  //           seo: _seoMetaTags {
-  //             ...metaTagsFragment
-  //           }
-  //           name
-  //           description
-  //           profession
-  //           location
-  //           email
-  //           coordinates {
-  //             latitude
-  //             longitude
-  //           }
-  //           photo {
-  //             desktopImage: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
-  //               ...imageFields
-  //             }
-  //             mobileImage: responsiveImage(imgixParams: { w: 192, h: 192, fit: crop, crop: faces, auto: format }) {
-  //               ...imageFields
-  //             }
-  //           }
-  //         }
-  //         theme {
-  //           color
-  //           backgroundImage {
-  //             url(imgixParams: { w: 1440, auto: format })
-  //             responsiveImage(imgixParams: { w: 1440, auto: format }) {
-  //               base64
-  //             }
-  //           }
-  //         }
-  //         socials: allSocials {
-  //           social
-  //           url
-  //         }
-  //       }
+  async mounted() {
+    this.data = await request({
+      query: `{
+        project(filter: { slug: { eq: "${ this.$route.params.slug}" } }) {
+          title
+          client {
+            id
+            name
+          }
+          skills {
+            id
+            name
+          }
+          description
+        }
+      }`
+    });
 
-  //       fragment metaTagsFragment on Tag {
-  //         attributes
-  //         content
-  //         tag
-  //       }
-  //       fragment imageFields on ResponsiveImage {
-  //         srcSet
-  //         sizes
-  //         src
-  //         width
-  //         height
-  //         alt
-  //         title
-  //         base64
-  //       }
-  //     `,
-  //   });
-  // },
+    this.projectExists = this.data.project != null;
+  },
 };
 </script>
 
 <style lang="scss">
-
+  p {
+    padding-bottom: 1rem;
+  }
 </style>

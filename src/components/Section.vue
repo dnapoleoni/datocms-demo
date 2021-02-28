@@ -2,7 +2,7 @@
     <article v-if="data">
         <h2>{{ data.title }}</h2>
         <ul role="list" :class="{ 'stack-list' : data.stack }">
-            <Entry v-for="entry in data.entries" :key="entry.id" :data="entry" :stacked="data.stacked"/>
+            <Entry v-for="entry in data.entries" :key="entry.id" :data="entry" :type="entry.__typename"/>
         </ul>
     </article>
 </template>

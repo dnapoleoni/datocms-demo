@@ -30,33 +30,53 @@ export default {
   },
   async mounted() {
     this.data = await request({
-      query: `
-       {
-        page(filter: { title: { eq: "Home" } }) {
+      query: `{
+        page(filter: {title: {eq: "Home"}}) {
           title
           sections {
             id
             title
             stack
             entries {
-              id
-              title
-              subtitle
-              text
-              url
-              newWindow
-              items{
+              __typename
+              ... on EntryRecord {
                 id
-                name
+                title
+                subtitle
+                text
                 url
                 newWindow
+                items {
+                  id
+                  name
+                  url
+                  newWindow
+                }
+                description
               }
-              description
+              ... on ProjectRecord {
+                id
+                title
+                slug
+                projectType
+                skills {
+                  id
+                  name
+                  url
+                  newWindow
+                }
+                client {
+                  id
+                  name
+                  url
+                  newWindow
+                }
+                description
+              }
             }
           }
         }
-      }
-      `,
+      }`,
     });
   }
 };

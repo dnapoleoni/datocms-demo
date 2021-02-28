@@ -1,10 +1,10 @@
 <template>
      <li role="listitem" v-if="data">
         <span>
-            <span v-if="data.title"><b>{{ data.title }}<span v-if="data.subtitle"> ({{data.subtitle}})</span></b>: </span>
-            <span v-if="data.text && data.url"><a :href="data.url" :target="data.newWindow ? '_blank' : '_self'">{{ data.text }}</a></span>
-            <Item v-for="(item, index) in data.items" :key="item.id" :data="item" :index="index" :max="data.items.length - 1"/>
-            <p v-if="data.description">{{ data.description }}</p>
+            <span v-if="computedData.title"><b>{{ computedData.title }}<span v-if="computedData.subtitle"> ({{computedData.subtitle}})</span></b>: </span>
+            <span v-if="computedData.text && computedData.url"><a :href="computedData.url" :target="computedData.newWindow ? '_blank' : '_self'">{{ computedData.text }}</a></span>
+            <Item v-for="(item, index) in computedData.items" :key="item.id" :data="item" :index="index" :max="computedData.items.length - 1"/>
+            <p v-if="computedData.description">{{ computedData.description }}</p>
         </span>
     </li>
 </template>
@@ -18,7 +18,21 @@ export default {
     },
     props: {
         data: Object,
-        stacked: Boolean
+        type: String
+    },
+    computed: {
+        computedData: function () {
+            let isEntry = this.type == "EntryRecord";
+            return {
+                description: this.data.description,
+                subtitle: isEntry ? this.data.subtitle : this.data.client.name,
+                title: isEntry ? this.data.title : this.data.projectType,
+                text: isEntry ? this.data.text : this.data.title,
+                url: isEntry ? this.data.url : "/project/" + this.data.slug,
+                newWindow: isEntry ? this.data.newWindow : false,
+                items: isEntry ? this.data.items : this.data.skills
+            }
+        }
     }
 }
 </script>

@@ -17,7 +17,7 @@ const routes = [
         component: Home
     },
     {
-        path: '/project/',
+        path: '/project/:slug',
         name: 'project',
         meta: {
             title: 'Project'
