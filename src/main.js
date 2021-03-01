@@ -2,12 +2,14 @@ import Vue from "vue";
 import router from './router'
 import { DatocmsImagePlugin } from "vue-datocms";
 import { library } from "@fortawesome/fontawesome-svg-core";
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
+import { faAngleLeft, faAngleRight, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueMeta from "vue-meta";
 import App from "./App.vue";
 
 library.add(faAngleLeft);
+library.add(faAngleRight);
+library.add(faHome);
 
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.use(DatocmsImagePlugin);

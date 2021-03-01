@@ -1,18 +1,26 @@
 <template>
       <header v-if="data">
+
+        <!-- home button -->
+        <button class="icon" v-if="!isHome" @click="$router.push('/home')"> 
+          <font-awesome-icon width="1em" height="1em" icon="home"/>
+        </button>
+      
+        <!-- title -->
         <div>
           <h1>{{ data.profile.name }}<br />{{ data.profile.profession }}</h1>
           <span>{{ data.profile.location }}</span>
         </div>
+
+        <!-- picture -->
         <div>
           <datocms-image
             class="profile-pic"
             :data="data.profile.photo.image"
           />
         </div>
-        <button v-if="!isHome" @click="$router.push('/home')">                  
-          <font-awesome-icon icon="angle-left" />
-          <span>Back</span></button>
+
+        
       </header>
 </template>
 
@@ -107,29 +115,14 @@ export default {
                   margin-top: 2rem;
               }
           }
-        }               
-
+        }      
+        
+        /* home */
         button {
           position:absolute;
-          left: 0;
-          bottom: -2rem;
-          border: $border-primary !important;
-          background-color: $colour-bg !important;
-          color: $colour-primary !important;
-          padding: 0.4rem 2rem;
-          margin-bottom: 1rem;
-          margin-left: 0.4rem;
-          transition:0.3s;
-
-          & > svg {
-            margin-right: 0.2rem;
-          }
-
-          &:hover {
-            border: $border-faint !important;
-            background-color: $colour-primary !important;
-            color: $colour-bg !important;
-          }
+          top: -1rem;
+          left: -1rem;
         }
+       
     }
 </style>

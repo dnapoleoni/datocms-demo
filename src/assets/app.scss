@@ -57,6 +57,15 @@ body {
         color: $colour-white;
         font-family: $font-plain;
         border: 0;
+
+        /* nav icon buttons */
+        &.icon {
+            border: none !important;
+            background-color: $colour-bg !important;
+            color: $colour-primary !important;
+            padding: 1rem;
+            transition:0.3s;
+        }
     }
 
     /* body inner */

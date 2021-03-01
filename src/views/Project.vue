@@ -1,5 +1,14 @@
 <template>
-    <main v-if="data">
+  <div v-if="data">
+    <nav>
+      <button class="icon prev" v-if="showNav && this.index > 1" @click="nextPrevRecord(false)">
+        <font-awesome-icon width="1em" height="1em" icon="angle-left" />
+      </button>
+      <button class="icon next" v-if="showNav && this.index < this.total" @click="nextPrevRecord(true)">
+        <font-awesome-icon width="1em" height="1em" icon="angle-right" />
+      </button>
+    </nav>
+    <main>
       <div v-if="projectExists">
         <h2>{{ this.data.project.title }}</h2>
         <!-- <p>{{ data.client.name }}</p> -->
@@ -9,6 +18,7 @@
         <p>You can either double-check your spelling (we all typo, it's cool) or hit the 'back' button to head back to the homepage and click one of the links I prepared earlier.</p>
       </div>
     </main> 
+  </div>
 </template>
 
 <script>
@@ -19,34 +29,128 @@ export default {
   data() {
     return {
       data: null,
-      projectExists: Boolean
-    };
+      projectExists: Boolean,
+      index: Number,
+      total: Number,
+      showNav: false,
+      slug: String
+    }
   },
-  async mounted() {
-    this.data = await request({
-      query: `{
-        project(filter: { slug: { eq: "${ this.$route.params.slug}" } }) {
-          title
-          client {
-            id
-            name
-          }
-          skills {
-            id
-            name
-          }
-          description
-        }
-      }`
-    });
+  methods: {
 
-    this.projectExists = this.data.project != null;
+    // call datocms & update values
+    async getProjectRecord (slug) {
+
+      // get datocms data
+      this.data = await request({
+        query: `{
+          project(filter: { slug: { eq: "${ slug }"} }) {
+            title
+            position
+            client {
+              id
+              name
+            }
+            skills {
+              id
+              name
+            }
+            description
+          }
+          _allProjectsMeta {
+            count
+          }
+        }`
+      });
+
+      // check if exists
+      this.projectExists = this.data.project != null;
+
+      // if exists, set up nav values
+      if (this.projectExists) {
+
+        this.index = Number(this.data.project.position);
+        this.total = Number(this.data._allProjectsMeta.count);
+        this.showNav = true;
+      }
+    },
+
+    // get next/previous slug
+    async nextPrevRecord (isNext) {
+
+      // get index to look up
+      let recordIndex = isNext ? this.index + 1 : this.index - 1;
+
+      // fetch it
+      let req = await request({
+        query: `{
+          project(filter: { position: { eq: "${ recordIndex }"} }) {
+            slug
+          }
+        }`
+      });
+
+      // push to router
+      this.$router.push('/project/' + req.project.slug)
+    }
+  },
+
+  // quick-fetch slug on project nav
+  beforeRouteUpdate(to, from, next) {
+
+    // check if different, just in case
+    if (this.slug != to.params.slug) {
+
+      // save new slug
+      this.slug = to.params.slug;
+      
+      // nav to new record
+      this.getProjectRecord(to.params.slug);
+    } else {
+      
+      // show error
+      this.projectExists = false;
+    }
+
+    next();
+  },
+  
+  // on first mount of page
+  async mounted() {
+
+    // save current slug
+    this.slug = this.$route.params.slug;
+    
+    // fetch record
+    this.getProjectRecord(this.slug);
   },
 };
 </script>
 
 <style lang="scss">
-  p {
-    padding-bottom: 1rem;
+div {
+  position:relative;
+  & > nav {
+    position:absolute;
+    width: 100%;
+    top: -1.5rem;
+
+    & > button {
+      position:absolute;
+      
+      &.next {
+        right: 0;
+      }
+      &.prev {
+        left: 0;
+      }
+    }
   }
+  & > main {
+    p {
+      padding-bottom: 1rem;
+    }
+  }
+}
+  
 </style>

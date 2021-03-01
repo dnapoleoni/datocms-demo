@@ -1,6 +1,6 @@
 <template>
     
-    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit">
+    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit" >
         <span>*required</span>
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
