@@ -1,6 +1,6 @@
 <template>
       <footer>
-        <span>Powered by <a href="https://www.vuejs.org" target="_blank">Vue.js,</a> <a href="https://www.datocms.com" target="_blank">DatoCMS</a> and <a href="https://www.netlify.com" target="_blank">Netlify</a></span>
+        <span>Powered by <a href="https://www.vuejs.org" target="_blank">Vue.js,</a> <a href="https://www.datocms.com" target="_blank">DatoCMS</a>, <a href="https://www.netlify.com" target="_blank">Netlify</a> and <a href="https://www.twilio.com" target="_blank">Twilio</a></span>
       </footer>
 </template>
 
@@ -20,7 +20,7 @@ export default {
     margin-top: auto;
 
     & span {
-      font-size: 0.8rem;
+      font-size: 0.65rem;
     }
   }
 </style>
