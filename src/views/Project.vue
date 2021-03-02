@@ -1,13 +1,21 @@
 <template>
   <div v-if="data">
     <nav>
+      <!-- prev project -->
       <button class="icon prev" v-if="showNav && this.index > 1" @click="nextPrevRecord(false)">
         <font-awesome-icon width="1em" height="1em" icon="angle-left" />
       </button>
+
+      <!-- current/total -->
+      <span>{{ index }}/{{ total }}</span>
+
+      <!-- next project -->
       <button class="icon next" v-if="showNav && this.index < this.total" @click="nextPrevRecord(true)">
         <font-awesome-icon width="1em" height="1em" icon="angle-right" />
       </button>
     </nav>
+    
+    <!-- project content -->
     <main>
       <div v-if="projectExists">
         <h2>{{ this.data.project.title }}</h2>
@@ -134,6 +142,7 @@ div {
     position:absolute;
     width: 100%;
     top: -1.5rem;
+    text-align:center;
 
     & > button {
       position:absolute;
@@ -144,6 +153,16 @@ div {
       &.prev {
         left: 0;
       }
+    }
+
+    & > span {
+      font-size:0.8rem;
+      font-weight: 600;
+      display:inline-block;
+      background-color: $colour-bg !important;
+      color: $colour-primary !important;
+      padding: 0.8rem 1rem;
+      letter-spacing: 0.1rem;
     }
   }
   & > main {

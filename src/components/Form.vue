@@ -1,27 +1,27 @@
 <template>
     
     <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit" >
-        <span>*required</span>
+        <span class="error">*required</span>
         <input type="hidden" name="form-name" value="cv-contact" />
         <div>
             <label for="name">Name:<span>*</span></label>
             <input id="name" type="text" name="name" v-model="data.name" @blur="handleBlur" required/>
-            <span>what should i call you?</span>
+            <span class="error">what should i call you?</span>
         </div>
         <div>
             <label for="email">Email:<span>*</span></label>
             <input id="email" type="email" name="email" v-model="data.email" @blur="handleBlur" required/>
-            <span>e.g. 2kool@vanillaicemail.com</span>
+            <span class="error">e.g. 2kool@vanillaicemail.com</span>
         </div>
         <div>
             <label for="phone">Phone:</label>
             <input id="phone" type="tel" name="phone" pattern="^\({0,1}((0|\+61)(2|4|3|7|8)){0,1}\){0,1}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{2}( |-){0,1}[0-9]{1}( |-){0,1}[0-9]{3}$" v-model="data.phone" @blur="handleBlur"/>
-            <span>eg 0408008135</span>
+            <span class="error">eg 0408008135</span>
         </div>
         <div>
             <label for="message">Message:<span>*</span></label>
             <textarea id="message" type="text" name="message" v-model="data.message" @blur="handleBlur" required></textarea>
-            <span>hmm watcha saaay</span>
+            <span class="error">hmm watcha saaay</span>
         </div>
         <div>
            <button type="submit">Submit</button>

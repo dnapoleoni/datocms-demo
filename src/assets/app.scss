@@ -51,12 +51,24 @@ body {
         margin: 1rem 0 2rem;
     }
 
+    /* small, plain text */
+    span {
+        font-weight: 400;
+        font-size: 1rem;
+        font-family: $font-plain;
+
+        &.error {
+            font-size: 0.75rem;
+        }
+    }
+
     button {
         cursor:pointer;
         background-color: $colour-primary;
         color: $colour-white;
         font-family: $font-plain;
         border: 0;
+        font-size: 0.8rem;
 
         /* nav icon buttons */
         &.icon {

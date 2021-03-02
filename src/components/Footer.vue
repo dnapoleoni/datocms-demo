@@ -11,12 +11,16 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   footer {
-    font-size: 0.8rem;
+    
     text-align: center;
     flex-shrink: 0;
     padding: 1rem 0;
     margin-top: auto;
+
+    & span {
+      font-size: 0.8rem;
+    }
   }
 </style>

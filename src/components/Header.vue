@@ -35,7 +35,7 @@ export default {
     };
   },
   computed: {
-  isHome() {
+    isHome() {
      return this.$route.name === 'home'
     }
   },

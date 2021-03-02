@@ -2,7 +2,10 @@
      <li role="listitem" v-if="data">
         <span>
             <span v-if="computedData.title"><b>{{ computedData.title }}<span v-if="computedData.subtitle"> ({{computedData.subtitle}})</span></b>: </span>
-            <span v-if="computedData.text && computedData.url"><a :href="computedData.url" :target="computedData.newWindow ? '_blank' : '_self'">{{ computedData.text }}</a></span>
+            <span v-if="computedData.text && computedData.url">
+                <router-link v-if="!isEntry" :to="computedData.url">{{ computedData.text }}</router-link>
+                <a v-if="isEntry" :href="computedData.url" :target="computedData.newWindow ? '_blank' : '_self'">{{ computedData.text }}</a>
+            </span>
             <Item v-for="(item, index) in computedData.items" :key="item.id" :data="item" :index="index" :max="computedData.items.length - 1"/>
             <p v-if="computedData.description">{{ computedData.description }}</p>
         </span>
@@ -21,16 +24,18 @@ export default {
         type: String
     },
     computed: {
+        isEntry: function() {
+            return this.type == "EntryRecord"
+        },
         computedData: function () {
-            let isEntry = this.type == "EntryRecord";
             return {
                 description: this.data.description,
-                subtitle: isEntry ? this.data.subtitle : this.data.client.name,
-                title: isEntry ? this.data.title : this.data.projectType,
-                text: isEntry ? this.data.text : this.data.title,
-                url: isEntry ? this.data.url : "/project/" + this.data.slug,
-                newWindow: isEntry ? this.data.newWindow : false,
-                items: isEntry ? this.data.items : this.data.skills
+                subtitle: this.isEntry ? this.data.subtitle : this.data.client.name,
+                title: this.isEntry ? this.data.title : this.data.projectType,
+                text: this.isEntry ? this.data.text : this.data.title,
+                url: this.isEntry ? this.data.url : "/project/" + this.data.slug,
+                newWindow: this.isEntry ? this.data.newWindow : false,
+                items: this.isEntry ? this.data.items : this.data.skills
             }
         }
     }
