@@ -2,7 +2,7 @@
   <div v-if="data">
     <nav>
       <!-- prev project -->
-      <button class="icon prev" v-if="showNav && this.index > 1" @click="nextPrevRecord(false)">
+      <button class="icon prev" :disabled="!(showNav && this.index > 1)" @click="nextPrevRecord(false)">
         <font-awesome-icon width="1em" height="1em" icon="angle-left" />
       </button>
 
@@ -10,7 +10,7 @@
       <span>{{ index }}/{{ total }}</span>
 
       <!-- next project -->
-      <button class="icon next" v-if="showNav && this.index < this.total" @click="nextPrevRecord(true)">
+      <button class="icon next" :disabled="!(showNav && this.index < this.total)" @click="nextPrevRecord(true)">
         <font-awesome-icon width="1em" height="1em" icon="angle-right" />
       </button>
     </nav>
@@ -152,6 +152,13 @@ div {
       }
       &.prev {
         left: 0;
+      }
+
+      &[disabled] {
+        cursor:initial;
+        & > svg {
+          opacity: 0.2;
+        }
       }
     }
 
