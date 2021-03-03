@@ -58,6 +58,11 @@ body {
         margin: 1rem 0 2rem;
     }
 
+    /* descriptions */
+    // p {
+
+    // }
+
     /* small, plain text */
     span {
         font-weight: 400;
@@ -67,6 +72,29 @@ body {
         &.error {
             font-size: 0.75rem;
         }
+    }
+
+    input, textarea {
+        flex-grow: 1;
+        border: $border-primary;
+        background-color: $colour-white;
+        font-family: $font-plain;
+        padding: 0.4rem 1rem;
+
+        &.used:invalid {
+            border: $border-highlight;
+            color: $colour-highlight;
+
+            & + span {
+                display:inline-block;
+            }
+        }
+    }
+
+    textarea {
+        min-height: 3rem;
+        box-sizing:border-box;
+        resize:vertical;
     }
 
     button {
@@ -109,6 +137,7 @@ body {
         }
 
         article {
+            e
             /* description */
             & > div {
                 margin-bottom: 0rem;

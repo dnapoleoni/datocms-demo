@@ -97,14 +97,10 @@ form {
         display:flex;
         flex-direction:row;
         position:relative;
+        margin-bottom: 1rem;
 
         @media only screen and (max-width: $break-mobile) {
             flex-direction:column;
-        }
-
-        & > * {
-            margin-bottom: 1rem;
-            font-family: $font-plain;
         }
 
         & > label {
@@ -120,32 +116,8 @@ form {
             }
         }
 
-        & > input,
-        & > textarea,
-        & > button {  
-            flex-grow: 1;
-            border: 0;
-            border: $border-primary;
-            background-color: $colour-white;
-            padding: 0.4rem 1rem;
-
-            &.used:invalid {
-                border: $border-highlight;
-                color: $colour-highlight;
-
-                & + span {
-                    display:inline-block;
-                }
-            }
-        }
-
-        & > textarea {
-            min-height: 3rem;
-            box-sizing:border-box;
-            resize:vertical;
-        }
-
         & > button {
+            flex-grow: 1;
             height: 2.4rem;
             max-width: 12rem;
             color: $colour-bg;
@@ -163,7 +135,7 @@ form {
             }
         }
 
-        /* errors */
+        /* error messages */
         & > span {
             position: absolute;
             right: 0;
@@ -175,6 +147,7 @@ form {
         /* buttons container only */
         &:last-child {
             justify-content: flex-end;
+            margin-bottom: 0;
         }
     }
 }

@@ -1,9 +1,15 @@
 <template>
     <article v-if="data">
         <h2>{{ data.title }}</h2>
+        <div v-if="data.description" v-html="data.description"></div>
         <ul role="list" :class="{ 'stack-list' : data.stack }">
             <Entry v-for="entry in data.entries" :key="entry.id" :data="entry" :type="entry.__typename"/>
         </ul>
+        <div v-if="!!this.$slots.default">
+            <slot>
+                <!-- inner content passed through here -->
+            </slot>
+        </div>
     </article>
 </template>
 
@@ -43,6 +49,11 @@ export default {
                 flex-direction: column;
                 left: 0;
             }
+        }
+
+        /* inner content */
+        & > div {
+            margin-top: 2rem;
         }
     }
     

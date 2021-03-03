@@ -2,13 +2,12 @@
       <main v-if="data">
 
           <!-- main content -->
-          <Section v-for="section in data.page.sections" :key="section.id" :data="section" />
+          <Section v-for="section in data.page.sections" :key="section.id" :data="section">
 
-          <!-- form -->
-          <article>
-            <h2>Hit me up</h2>
-            <Form />
-          </article>
+            <!-- pass form component to slot of hmu section -->
+            <Form v-if="section.title == 'Hit me up'"/>
+
+          </Section>
       </main>
 </template>
 
@@ -36,6 +35,7 @@ export default {
           sections {
             id
             title
+            description
             stack
             entries {
               __typename
