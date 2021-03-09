@@ -10,18 +10,18 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
-    <noscript>
+    <!-- <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
+    </noscript> -->
     <div id="app"></div>
     <!-- built files will be auto injected -->
 
     <!-- hidden form for netlify prerender -->
-    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" hidden>
-      <input id="fname" name="name" />
-      <input id="email" name="email" />
-      <input id="phone" name="phone" />
-      <textarea id="message" class="message" name="message"></textarea>
+    <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" aria-hidden="true" hidden>
+      <input aria-hidden="true" aria-label="Hidden for netlify purposes - name field" id="fname" name="name" />
+      <input aria-hidden="true" aria-label="Hidden for netlify purposes - email field" id="email" name="email" />
+      <input aria-hidden="true" aria-label="Hidden for netlify purposes - phone field" id="phone" name="phone" />
+      <textarea aria-hidden="true" aria-label="hidden for netlify purposes - message field" id="message" class="message" name="message"></textarea>
     </form>
   </body>
 </html>

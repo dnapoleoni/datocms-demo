@@ -24,7 +24,7 @@ export default {
   },
   data() {
     return {
-      data: null,
+      data: null
     };
   },
   async mounted() {

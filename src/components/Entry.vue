@@ -3,8 +3,8 @@
         <span>
             <span v-if="computedData.title"><b>{{ computedData.title }}<span v-if="computedData.subtitle"> ({{computedData.subtitle}})</span></b>: </span>
             <span v-if="computedData.text && computedData.url">
-                <router-link v-if="!isEntry" :to="computedData.url">{{ computedData.text }}</router-link>
-                <a v-if="isEntry" :href="computedData.url" :target="computedData.newWindow ? '_blank' : '_self'">{{ computedData.text }}</a>
+                <router-link tabindex="0" v-if="!isEntry" :to="computedData.url">{{ computedData.text }}</router-link>
+                <a tabindex="0" v-if="isEntry" :href="computedData.url" :target="computedData.newWindow ? '_blank' : '_self'">{{ computedData.text }}</a>
             </span>
             <Item v-for="(item, index) in computedData.items" :key="item.id" :data="item" :index="index" :max="computedData.items.length - 1"/>
             <p v-if="computedData.description">{{ computedData.description }}</p>

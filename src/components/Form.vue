@@ -2,7 +2,7 @@
     
     <form name="cv-contact" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" @submit.prevent="handleSubmit" >
         <span class="error">*required</span>
-        <input type="hidden" name="form-name" value="cv-contact" />
+        <input aria-hidden="true" type="hidden" name="form-name" value="cv-contact" title="This is a hidden input designed to trap spambots"/>
         <div>
             <label for="name">Name:<span>*</span></label>
             <input id="name" type="text" name="name" v-model="data.name" @blur="handleBlur" required/>

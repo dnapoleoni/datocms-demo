@@ -18,8 +18,10 @@
     <!-- project content -->
     <main>
       <div v-if="projectExists">
-        <h2>{{ this.data.project.title }}</h2>
-        <!-- <p>{{ data.client.name }}</p> -->
+        <div class="row header">
+          <h2>{{ this.data.project.title }}</h2>
+          <a :href="data.project.url" target="_blank" title="View Project"><span>View</span></a>
+        </div>
       </div>
       <div v-else>
         <p>Sorry, that project doesn't seem to exist. Are you sure you meant to visit <b>{{ this.$route.params.slug }}</b>?</p>
@@ -55,6 +57,7 @@ export default {
           project(filter: { slug: { eq: "${ slug }"} }) {
             title
             position
+            url
             client {
               id
               name
@@ -138,6 +141,32 @@ export default {
 <style lang="scss">
 div {
   position:relative;
+
+  // each content row
+  &.row {
+
+    display:flex;
+    flex-direction: column;
+
+    // first content row
+    &.header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items:center;
+
+      @media only screen and (max-width: $break-mobile) {
+        flex-direction: column;
+      }
+
+      a {
+        white-space: nowrap;
+      }
+      
+      h2 {
+        margin: 1rem 0;
+      }
+    }
+  }
   & > nav {
     position:absolute;
     width: 100%;
