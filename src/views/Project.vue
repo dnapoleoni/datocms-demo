@@ -2,7 +2,7 @@
   <div v-if="data">
     <nav>
       <!-- prev project -->
-      <button class="icon prev" :disabled="!(showNav && this.index > 1)" @click="nextPrevRecord(false)">
+      <button class="icon prev" :disabled="!(showNav && index > 1)" @click="nextPrevRecord(false)">
         <font-awesome-icon width="1em" height="1em" icon="angle-left" />
       </button>
 
@@ -10,7 +10,7 @@
       <span>{{ index }}/{{ total }}</span>
 
       <!-- next project -->
-      <button class="icon next" :disabled="!(showNav && this.index < this.total)" @click="nextPrevRecord(true)">
+      <button class="icon next" :disabled="!(showNav && index < this.total)" @click="nextPrevRecord(true)">
         <font-awesome-icon width="1em" height="1em" icon="angle-right" />
       </button>
     </nav>
@@ -18,11 +18,22 @@
     <!-- project content -->
     <main>
       <div v-if="projectExists">
+
+        <!-- static first row -->
         <div class="row header">
-          <h2>{{ this.data.project.title }}</h2>
+          <h2>{{ data.project.title }}</h2>
           <a :href="data.project.url" target="_blank" title="View Project"><span>View</span></a>
         </div>
+
+        <!-- dynamic content rows -->
+        <div class="row" v-for="(item, index) in data.project.content" :key="index">
+          <h3 class="project-heading" v-if="!!item.heading">{{ item.heading }}</h3>
+          <p class="project-copy" v-if="!!item.copy">{{ item.copy }}</p>
+          <datocms-image class="project-image" v-if="!!item.photo" :data="item.photo.image"/>
+        </div>
       </div>
+
+      <!-- error message -->
       <div v-else>
         <p>Sorry, that project doesn't seem to exist. Are you sure you meant to visit <b>{{ this.$route.params.slug }}</b>?</p>
         <p>You can either double-check your spelling (we all typo, it's cool) or hit the 'back' button to head back to the homepage and click one of the links I prepared earlier.</p>
@@ -67,11 +78,45 @@ export default {
               name
             }
             description
+              content {
+              ...on ProjectCopyRecord {
+                id
+                copy
+              }
+              ...on ProjectHeadingRecord {
+                id
+                heading
+              }
+              ...on ProjectImageRecord {
+                id
+                caption
+                url
+                photo {
+                  image: responsiveImage(imgixParams: { fit: clip, crop: faces, auto: format }) {
+                    ...imageFields
+                  }
+                }
+              }
+            }
           }
           _allProjectsMeta {
             count
           }
-        }`
+        }
+        fragment imageFields on ResponsiveImage {
+            srcSet
+            webpSrcSet
+            sizes
+            src
+            width
+            height
+            aspectRatio
+            alt
+            title
+            bgColor
+            base64
+        }
+        `
       });
 
       // check if exists
@@ -147,6 +192,7 @@ div {
 
     display:flex;
     flex-direction: column;
+    margin: 4rem 0;
 
     // first content row
     &.header {
@@ -164,6 +210,23 @@ div {
       
       h2 {
         margin: 1rem 0;
+      }
+    }
+
+    // content
+    & > .project- {
+
+      &header {
+
+      }
+
+      &copy {
+        
+      }
+
+      &image {
+        max-width: $break-tablet;
+        margin: 0 auto;
       }
     }
   }
