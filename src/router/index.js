@@ -12,7 +12,7 @@ const routes = [
         path: '/',
         name: 'home',
         meta: {
-            title: 'Home'
+            title: 'Daniel Napoleoni | Frontend Developer'
         },
         component: Home
     },
@@ -20,7 +20,7 @@ const routes = [
         path: '/project/:slug',
         name: 'project',
         meta: {
-            title: 'Project'
+            title: 'Project: loading...'
         },
         component: Project
     },

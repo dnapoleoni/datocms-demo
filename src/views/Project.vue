@@ -128,6 +128,9 @@ export default {
         this.index = Number(this.data.project.position);
         this.total = Number(this.data._allProjectsMeta.count);
         this.showNav = true;
+
+        // set page title
+        document.title = "Project: " + this.data.project.title;
       }
     },
 
