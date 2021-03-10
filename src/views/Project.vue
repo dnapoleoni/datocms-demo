@@ -192,7 +192,32 @@ div {
 
     display:flex;
     flex-direction: column;
-    margin: 4rem 0;
+
+    // content
+    & > * {
+      margin: 3rem 0 4rem;
+
+      @media only screen and (max-width: $break-tablet) {
+        margin: 2rem 0 3rem;
+      }
+
+      @media only screen and (max-width: $break-mobile) {
+        margin: 1rem 0 2rem;
+      }
+
+      &.project-header {
+
+      }
+
+      &.project-copy {
+        
+      }
+
+      &.project-image {
+        max-width: $break-tablet;
+        margin: 0 auto;
+      }
+    }
 
     // first content row
     &.header {
@@ -203,30 +228,19 @@ div {
       @media only screen and (max-width: $break-mobile) {
         flex-direction: column;
       }
+      
+      // overwrite content margins
+      & > * {
+        margin: 1rem 0;
+      }
 
       a {
         white-space: nowrap;
-      }
-      
-      h2 {
-        margin: 1rem 0;
-      }
-    }
 
-    // content
-    & > .project- {
-
-      &header {
-
-      }
-
-      &copy {
-        
-      }
-
-      &image {
-        max-width: $break-tablet;
-        margin: 0 auto;
+        // overwrite margin for mobile
+        @media only screen and (max-width: $break-mobile) {
+          margin: 0;
+        }
       }
     }
   }
