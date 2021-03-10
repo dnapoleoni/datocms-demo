@@ -28,7 +28,7 @@
         <!-- dynamic content rows -->
         <div class="row" v-for="(item, index) in data.project.content" :key="index">
           <h3 class="project-heading" v-if="!!item.heading">{{ item.heading }}</h3>
-          <p class="project-copy" v-if="!!item.copy">{{ item.copy }}</p>
+          <p class="project-copy" v-if="!!item.copy" v-html="item.copy"></p>
           <datocms-image class="project-image" v-if="!!item.photo" :data="item.photo.image"/>
         </div>
       </div>
@@ -195,14 +195,10 @@ div {
 
     // content
     & > * {
-      margin: 3rem 0 4rem;
-
-      @media only screen and (max-width: $break-tablet) {
-        margin: 2rem 0 3rem;
-      }
+      margin: 2rem auto;
 
       @media only screen and (max-width: $break-mobile) {
-        margin: 1rem 0 2rem;
+        margin: 0.6rem auto;
       }
 
       &.project-header {
@@ -210,12 +206,13 @@ div {
       }
 
       &.project-copy {
-        
+        text-align:justify;
       }
 
       &.project-image {
-        max-width: $break-tablet;
-        margin: 0 auto;
+        @media only screen and (min-width: $break-mobile) {
+          max-width: 800px;
+        }
       }
     }
 
