@@ -7,7 +7,7 @@
                 <a tabindex="0" v-if="isEntry" :href="computedData.url" :target="computedData.newWindow ? '_blank' : '_self'">{{ computedData.text }}</a>
             </span>
             <Item v-for="(item, index) in computedData.items" :key="item.id" :data="item" :index="index" :max="computedData.items.length - 1"/>
-            <p v-if="computedData.description">{{ computedData.description }}</p>
+            <p class="entry-description" v-if="computedData.description">{{ computedData.description }}</p>
         </span>
     </li>
 </template>
@@ -45,10 +45,14 @@ export default {
 <style lang="scss">
     li {
         white-space: nowrap;
-        margin: 0px 1rem 0.6rem 0;
+        margin: 0 1rem 0.6rem 0;
 
         & > p {
             margin: 0.4rem 0 0.6rem;
+        }
+
+        & .entry-description {
+            margin-top:0.2rem;
         }
 
         /* mobile */

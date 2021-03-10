@@ -1,8 +1,8 @@
 <template>
-  <div v-if="data">
+  <div v-if="data" v-touch:swipe="swipeHandler">
     <nav>
       <!-- prev project -->
-      <button class="icon prev" :disabled="!(showNav && index > 1)" @click="nextPrevRecord(false)">
+      <button class="icon prev" :disabled="!(showNav && isPrev)" @click="nextPrevRecord(false)">
         <font-awesome-icon width="1em" height="1em" icon="angle-left" />
       </button>
 
@@ -10,7 +10,7 @@
       <span>{{ index }}/{{ total }}</span>
 
       <!-- next project -->
-      <button class="icon next" :disabled="!(showNav && index < this.total)" @click="nextPrevRecord(true)">
+      <button class="icon next" :disabled="!(showNav && isNext)" @click="nextPrevRecord(true)">
         <font-awesome-icon width="1em" height="1em" icon="angle-right" />
       </button>
     </nav>
@@ -132,10 +132,10 @@ export default {
     },
 
     // get next/previous slug
-    async nextPrevRecord (isNext) {
+    async nextPrevRecord (direction) {
 
       // get index to look up
-      let recordIndex = isNext ? this.index + 1 : this.index - 1;
+      let recordIndex = direction ? this.index + 1 : this.index - 1;
 
       // fetch it
       let req = await request({
@@ -148,7 +148,22 @@ export default {
 
       // push to router
       this.$router.push('/project/' + req.project.slug)
+    },
+
+    // swipe left/right to nav projects
+    swipeHandler (direction) {
+      console.log('Swipe:: ' + direction);
+      if (direction == "left" && this.isNext) {
+        this.nextPrevRecord (true) 
+      } else if (direction == "right" && this.isPrev) {
+        this.nextPrevRecord (false) 
+      } 
     }
+  },
+
+  computed: {
+    isNext() { return this.index < this.total },
+    isPrev() { return this.index > 1}
   },
 
   // quick-fetch slug on project nav

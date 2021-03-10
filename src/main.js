@@ -1,6 +1,7 @@
 import Vue from "vue";
 import router from './router'
 import { DatocmsImagePlugin } from "vue-datocms";
+import Vue2TouchEvents from "vue2-touch-events";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faAngleLeft, faAngleRight, faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -14,6 +15,7 @@ library.add(faHome);
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 Vue.use(DatocmsImagePlugin);
 Vue.use(VueMeta);
+Vue.use(Vue2TouchEvents)
 
 Vue.config.productionTip = false;
 Vue.config.devtools = true;
