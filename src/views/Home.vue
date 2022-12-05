@@ -49,6 +49,8 @@ export default {
                 items {
                   id
                   name
+                  tooltip
+                  strike
                   url
                   newWindow
                 }
