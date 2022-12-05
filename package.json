@@ -16,6 +16,7 @@
     "core-js": "^3.6.4",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.1",
+    "string-similarity": "^4.0.4",
     "vue": "^2.6.11",
     "vue-datocms": "^0.0.4",
     "vue-meta": "^2.3.3",

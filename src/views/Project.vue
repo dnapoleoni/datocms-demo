@@ -1,6 +1,6 @@
 <template>
   <div v-if="data" v-touch:swipe="swipeHandler">
-    <nav>
+    <nav v-if="projectExists">
       <!-- prev project -->
       <button class="icon prev" :disabled="!(showNav && isPrev)" @click="nextPrevRecord(false)">
         <font-awesome-icon width="1em" height="1em" icon="angle-left" />
@@ -14,6 +14,8 @@
         <font-awesome-icon width="1em" height="1em" icon="angle-right" />
       </button>
     </nav>
+
+    <nav v-else><span>o h 🤖 n o </span></nav>
     
     <!-- project content -->
     <main>
@@ -36,8 +38,15 @@
 
       <!-- error message -->
       <div v-else>
-        <p>Sorry, that project doesn't seem to exist. Are you sure you meant to visit <b>{{ this.$route.params.slug }}</b>?</p>
-        <p>You can either double-check your spelling (we all typo, it's cool) or hit the 'back' button to head back to the homepage and click one of the links I prepared earlier.</p>
+        <p>Sorry, that project doesn't seem to exist.</p>
+        
+        <!-- close enough to a page we can redirect them there -->
+        <p v-if="isGuess">I think maybe you were aiming for <router-link :to="('/project/' + this.bestMatch.target)">{{ this.bestMatch.target }}</router-link>? 🤷</p>
+        <p v-if="isGuess">I reckon give that link a good ol' click, otherwise there's no shame in heading back to the <router-link :to="'/'">homepage</router-link> to check out the projects listed there.</p>
+        
+        <!-- no clue - end of the road, bud -->
+        <p v-if="!isGuess">I can't even guess what page you were trying to reach - let's just chalk this one up to gremlins in the system!</p>
+        <p v-if="!isGuess">If you're stuck, I'd suggest heading on back to the <router-link :to="'/'">homepage</router-link> and clicking one of the links I prepared earlier.</p>
       </div>
     </main> 
   </div>
@@ -45,6 +54,7 @@
 
 <script>
 import { request } from "@/lib/datocms";
+import { findBestMatch } from "string-similarity";
 
 export default {
   name: "Project",
@@ -55,7 +65,9 @@ export default {
       index: Number,
       total: Number,
       showNav: false,
-      slug: String
+      slug: String,
+      bestMatch: Object,
+      matchFloor: 0.3
     }
   },
   methods: {
@@ -104,6 +116,9 @@ export default {
           _allProjectsMeta {
             count
           }
+          allProjects {
+            slug
+          }
         }
         fragment imageFields on ResponsiveImage {
             srcSet
@@ -133,6 +148,9 @@ export default {
 
         // set page title
         document.title = "Project: " + this.data.project.title;
+      } else {
+        const slugs = this.data.allProjects.map(p => p.slug);
+        this.bestMatch = findBestMatch(this.slug, slugs).bestMatch;
       }
     },
 
@@ -162,12 +180,19 @@ export default {
       } else if (direction == "right" && this.isPrev) {
         this.nextPrevRecord (false) 
       } 
-    }
+    },
+
+    // link to the autocorrected slug
+   goToBestMatch() {
+
+    this.$router.push('/project/' + this.bestMatch)
+   }
   },
 
   computed: {
     isNext() { return this.index < this.total },
-    isPrev() { return this.index > 1}
+    isPrev() { return this.index > 1},
+    isGuess() { return this.bestMatch.rating > this.matchFloor }
   },
 
   // quick-fetch slug on project nav
@@ -195,6 +220,7 @@ export default {
 
     // save current slug
     this.slug = this.$route.params.slug;
+
     
     // fetch record
     this.getProjectRecord(this.slug);
