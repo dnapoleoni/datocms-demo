@@ -38,7 +38,7 @@
 
       <!-- error message -->
       <div v-else>
-        <p>Sorry, that project doesn't seem to exist.</p>
+        <p>Uh-oes! Soooooo according to our records that project doesn't seem to actually exist.</p>
         
         <!-- close enough to a page we can redirect them there -->
         <p v-if="isGuess">I think maybe you were aiming for <router-link :to="('/project/' + this.bestMatch.target)">{{ this.bestMatch.target }}</router-link>? 🤷</p>
