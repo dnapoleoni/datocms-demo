@@ -1,6 +1,6 @@
 <template>
       <footer>
-        <span>Powered by <a href="https://www.vuejs.org" target="_blank" tabindex="0">Vue.js,</a> <a href="https://www.datocms.com" target="_blank" tabindex="0">DatoCMS</a>, <a href="https://www.netlify.com" target="_blank" tabindex="0">Netlify</a> and <a href="https://www.twilio.com" target="_blank" tabindex="0">Twilio</a></span>
+        <span>Powered by <a href="https://www.vuejs.org" target="_blank" tabindex="0">Vue.js,</a> <a href="https://www.datocms.com" target="_blank" tabindex="0">DatoCMS</a> and <a href="https://www.netlify.com" target="_blank" tabindex="0">Netlify</a></span>
       </footer>
 </template>
 
