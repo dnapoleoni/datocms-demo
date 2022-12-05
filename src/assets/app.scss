@@ -107,7 +107,7 @@ body {
         transition:0.3s;
 
         /* nav icon buttons */
-        &.icon {
+        &.icon{
             border: none;
             background-color: $colour-bg;
             color: $colour-primary;
@@ -117,9 +117,7 @@ body {
                 color: $colour-highlight;
                 transition:0.3s;
             }
-        }
-
-        
+        }     
     }
 
     /* body inner */

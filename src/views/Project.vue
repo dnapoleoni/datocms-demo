@@ -22,7 +22,8 @@
         <!-- static first row -->
         <div class="row header">
           <h2>{{ data.project.title }}</h2>
-          <a :href="data.project.url" target="_blank" title="View Project"><span>View</span></a>
+          <a v-if="data.project.linkExists" :href="data.project.url" target="_blank" title="View Project"><span>View</span></a>
+          <a disabled tabIndex="-1" class="no-link" href="#" title="This project is no longer online" v-else>View</a>
         </div>
 
         <!-- dynamic content rows -->
@@ -69,6 +70,7 @@ export default {
             title
             position
             url
+            linkExists
             client {
               id
               name
@@ -155,7 +157,6 @@ export default {
 
     // swipe left/right to nav projects
     swipeHandler (direction) {
-      console.log('Swipe:: ' + direction);
       if (direction == "left" && this.isNext) {
         this.nextPrevRecord (true) 
       } else if (direction == "right" && this.isPrev) {
@@ -256,6 +257,11 @@ div {
         @media only screen and (max-width: $break-mobile) {
           margin: 0;
         }
+
+        &.no-link {
+          text-decoration: line-through;
+          pointer-events: none;
+        }
       }
     }
   }
@@ -296,6 +302,10 @@ div {
   & > main {
     p {
       padding-bottom: 1rem;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
     }
   }
 }

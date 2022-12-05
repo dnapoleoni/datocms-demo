@@ -53,6 +53,7 @@ export default {
 
         & .entry-description {
             margin-top:0.2rem;
+            margin-bottom:1rem;
         }
 
         /* mobile */

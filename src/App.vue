@@ -34,6 +34,28 @@ export default {
         }
     },
     async mounted() {
+        // welcome
+        console.log(`
+-------------------------
+Welcome to the devtools!
+
+Like 99% of dev portfolios this one's only ever
+updated in a job-hunting hurry but if you're keen to
+have a stalk around the codebase the repo is here:
+
+https://github.com/dnapoleoni/datocms-demo
+
+Also the site's been left in dev mode so you can
+take a spin through the Vue Dev tools if you're
+rocking Chrome: 
+
+https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
+
+Hope to hear from you soon,
+Dan
+-------------------------
+        `);
+
         this.data = await request({
         query: `
             {
