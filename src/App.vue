@@ -51,6 +51,9 @@ rocking Chrome:
 
 https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd?hl=en
 
+(ignore the showImage logs, they're from the datocms library
+and I can't kill them without killing this message!)
+
 Hope to hear from you soon,
 Dan
 -------------------------

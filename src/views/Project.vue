@@ -33,6 +33,7 @@
           <h3 class="project-heading" v-if="!!item.heading">{{ item.heading }}</h3>
           <p class="project-copy" v-if="!!item.copy" v-html="item.copy"></p>
           <datocms-image class="project-image" v-if="!!item.photo" :data="item.photo.image"/>
+          <span class="project-image-caption" v-if="item.caption">{{ item.caption }}</span>
         </div>
       </div>
 
@@ -49,6 +50,9 @@
         <p v-if="!isGuess">If you're stuck, I'd suggest heading on back to the <router-link :to="'/'">homepage</router-link> and clicking one of the links I prepared earlier.</p>
       </div>
     </main> 
+
+    <!-- loading modal -->
+    <!-- <div v-if="loading" class="loading"></div> -->
   </div>
 </template>
 
@@ -67,7 +71,8 @@ export default {
       showNav: false,
       slug: String,
       bestMatch: Object,
-      matchFloor: 0.3
+      matchFloor: 0.3,
+      loading: true
     }
   },
   methods: {
@@ -196,7 +201,9 @@ export default {
   },
 
   // quick-fetch slug on project nav
-  beforeRouteUpdate(to, from, next) {
+  async beforeRouteUpdate(to, from, next) {
+
+    // this.loading = true;
 
     // check if different, just in case
     if (this.slug != to.params.slug) {
@@ -205,7 +212,7 @@ export default {
       this.slug = to.params.slug;
       
       // nav to new record
-      this.getProjectRecord(to.params.slug);
+      await this.getProjectRecord(to.params.slug);
     } else {
       
       // show error
@@ -223,7 +230,11 @@ export default {
 
     
     // fetch record
-    this.getProjectRecord(this.slug);
+    await this.getProjectRecord(this.slug);
+
+    //
+    // this.loading = false;
+    
   },
 };
 </script>
@@ -255,9 +266,16 @@ div {
       }
 
       &.project-image {
+        border-radius: 4px;
         @media only screen and (min-width: $break-mobile) {
           max-width: 800px;
         }
+      }
+
+      &.project-image-caption {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size:smaller;
       }
     }
 
@@ -334,6 +352,18 @@ div {
       }
     }
   }
+
+  // .loading {
+  //   position:absolute;
+  //   left: 0;
+  //   top: 0;
+  //   right: 0;
+  //   bottom: 0;
+  //   background-color: rgba(255,255,255,0.8);
+  //   margin-top:10px;
+  //   pointer-events: none;
+  //   z-index: 99999;
+  // }
 }
   
 </style>
