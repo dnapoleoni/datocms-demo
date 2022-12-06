@@ -45,8 +45,8 @@ body {
     /* title */
     h1 {
         font-weight: 700;
-        font-size: 4.5vmax;
-        line-height: 5vmax;
+        font-size: min(4.5vmax, 80px);
+        line-height: min(5vmax, 90px);
         margin-top: 2rem;
     }
 
