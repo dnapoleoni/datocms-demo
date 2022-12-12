@@ -1,17 +1,19 @@
 <template>
     <div id="app">
         <section>
-            <Header />
+            <NavBar :data="data"></NavBar>
+            <Header :data="data"></Header>
             <transition name="fade">
-                <router-view />
+                <router-view ref="view"></router-view>
             </transition>
-            <Footer />
+            <Footer ></Footer>
         </section>
     </div>
 </template>
 
 <script>
 
+import NavBar from "@/components/NavBar.vue"
 import Header from "@/components/Header.vue"
 import Footer from "@/components/Footer.vue"
 import { request } from "@/lib/datocms";
@@ -19,6 +21,7 @@ import { request } from "@/lib/datocms";
 export default {
     name: 'app',
     components: {
+        NavBar,
         Header,
         Footer
     },
@@ -27,12 +30,54 @@ export default {
             data: null
         }
     },
+    methods: {
+        getPageValues() {
+            return {
+                a: 1,
+                b: 2
+            }
+        }
+    },
     watch: {
         // update meta on route change
         '$route' (to) {
             document.title = to.meta.title
+            // const sameTemplate = to.name == from.name;
+            // const projectTop = 260;
+            // const view = this.$refs.view;
+            // const project = view.$refs.project;
+            // const isProject = sameTemplate && project != undefined;
+            // if (isProject) {
+            //     const rect = project.getBoundingClientRect();
+            //     if (rect.top < projectTop / 2) {
+            //         window.scrollTo(0,projectTop);
+            //     }
+            // } else {
+            //     window.scrollTo({
+            //         top: 0,
+            //         left: 0, 
+            //         behaviour: 'smooth'
+            //     });
+            // }
         }
     },
+//     watch:{
+//     $route (to, from){
+//       const content = this.$refs.content;
+//       if (content) {
+//         const rect = content.getBoundingClientRect();
+//         const top = Math.ceil(rect.top);
+//         console.log(to, from)
+//         if (to.name == from.name) {
+//           if (top < 130) {
+//             window.scrollTo(0,260);
+//           }
+//         } else {
+//           window.scrollTo(0,0);
+//         }
+//       }
+//     }
+//   },
     async mounted() {
         // welcome
         console.log(`
@@ -71,6 +116,16 @@ Dan
                     seo: _seoMetaTags {
                     ...metaTagsFragment
                     }
+                    name
+                    profession
+                    photo {
+                        image: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
+                            ...imageFields
+                        }
+                    }
+                    location
+                    emailAddress
+                    phoneNumber
                 }
             }
 
@@ -78,6 +133,20 @@ Dan
                 attributes
                 content
                 tag
+            }
+
+            fragment imageFields on ResponsiveImage {
+                srcSet
+                webpSrcSet
+                sizes
+                src
+                width
+                height
+                aspectRatio
+                alt
+                title
+                bgColor
+                base64
             }
         `,
         });

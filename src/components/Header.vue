@@ -1,22 +1,5 @@
 <template>
       <header v-if="data">
-
-        <div class="icons">
-          <!-- home button -->
-          <button class="icon" @click="$router.push('/home')" :class="isHome && 'disabled'" :tabindex="isHome && -1"> 
-            <font-awesome-icon width="1em" height="1em" icon="home"/>
-          </button>
-          
-          <!-- email button -->
-          <button class="icon" @click="displayEmail" :class="isEmail && 'selected'"> 
-            <font-awesome-icon width="1em" height="1em" icon="envelope"/>
-          </button>
-          
-          <!-- phone button -->
-          <button class="icon" @click="displayTel" :class="isTel && 'selected'"> 
-            <font-awesome-icon width="1em" height="1em" icon="phone"/>
-          </button>
-        </div>
       
         <!-- title -->
         <div>
@@ -41,16 +24,22 @@
 </template>
 
 <script>
-import { request } from "@/lib/datocms";
+// import { request } from "@/lib/datocms";
 
 export default {
   name: "Header",
   data() {
     return {
-      data: null,
+      // data: null,
       isEmail: false,
       isTel: false
     };
+  },
+  props: {
+    data: {
+      type: Object,
+      default: () => {}
+    }
   },
   computed: {
     isHome() {
@@ -67,39 +56,39 @@ export default {
       this.isEmail = false;
     }
   },
-  async mounted() {
-    this.data = await request({
-      query: `
-        {
-          profile {
-            name
-            profession
-            photo {
-              image: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
-                ...imageFields
-              }
-            }
-            location
-            emailAddress
-            phoneNumber
-          }
-        }
-        fragment imageFields on ResponsiveImage {
-            srcSet
-            webpSrcSet
-            sizes
-            src
-            width
-            height
-            aspectRatio
-            alt
-            title
-            bgColor
-            base64
-        }
-      `,
-    });
-  },
+  // async mounted() {
+  //   this.data = await request({
+  //     query: `
+  //       {
+  //         profile {
+  //           name
+  //           profession
+  //           photo {
+  //             image: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
+  //               ...imageFields
+  //             }
+  //           }
+  //           location
+  //           emailAddress
+  //           phoneNumber
+  //         }
+  //       }
+  //       fragment imageFields on ResponsiveImage {
+  //           srcSet
+  //           webpSrcSet
+  //           sizes
+  //           src
+  //           width
+  //           height
+  //           aspectRatio
+  //           alt
+  //           title
+  //           bgColor
+  //           base64
+  //       }
+  //     `,
+  //   });
+  // },
 };
 </script>
 
@@ -111,6 +100,7 @@ export default {
       align-items: center;
       border-bottom: $border-primary;
       padding-bottom: 1.6rem;
+      margin-top:2rem;
       flex-shrink: 0;
       position:relative;
 
@@ -119,6 +109,7 @@ export default {
           justify-content: start;
           flex-direction:column;
           text-align: center;
+          margin-top:1rem;
       }
 
       /* subtitle */
@@ -149,9 +140,9 @@ export default {
       
       /* home */
       .icons {
-        position:absolute;
+        position:sticky;
         z-index: 10;
-        top: -1rem;
+        top: 2rem;
         left: -1rem;
 
         .icon {

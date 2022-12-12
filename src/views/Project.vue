@@ -1,6 +1,6 @@
 <template>
   <div v-if="data" v-touch:swipe="swipeHandler">
-    <nav v-if="projectExists">
+    <nav aria-label="Project navigation" v-if="projectExists">
       <!-- prev project -->
       <button class="icon prev" :disabled="!(showNav && isPrev)" @click="nextPrevRecord(false)">
         <font-awesome-icon width="1em" height="1em" icon="angle-left" />
@@ -15,17 +15,26 @@
       </button>
     </nav>
 
-    <nav v-else><span>o h 🤖 n o </span></nav>
-    
+    <nav aria-label="Navigation error message" v-else>
+    <!-- <nav aria-label="Project navigation" v-if="projectExists"> -->
+      <!-- prev project -->
+      <span class="errormoji prev">⚠️</span>
+
+      <!-- errorz -->
+      <span>o h 🤖 n o</span>
+
+      <!-- emojis -->
+      <span class="errormoji next">⚠️</span>
+    </nav>
     <!-- project content -->
     <main>
-      <div v-if="projectExists">
+      <div ref="project" v-if="projectExists">
 
         <!-- static first row -->
         <div class="row header">
           <h2>{{ data.project.title }}</h2>
           <a v-if="data.project.linkExists" :href="data.project.url" target="_blank" title="View Project"><span>View</span></a>
-          <a disabled tabIndex="-1" class="no-link" href="#" title="This project is no longer online" v-else>View</a>
+          <!-- <a disabled tabIndex="-1" class="no-link" href="#" title="This project is no longer online" v-else>View</a> -->
         </div>
 
         <!-- dynamic content rows -->
@@ -58,6 +67,7 @@
 
 <script>
 import { request } from "@/lib/datocms";
+// import { Vue } from "vue";
 import { findBestMatch } from "string-similarity";
 
 export default {
@@ -221,6 +231,8 @@ export default {
 
     next();
   },
+
+  
   
   // on first mount of page
   async mounted() {
@@ -234,12 +246,15 @@ export default {
 
     //
     // this.loading = false;
+
+    // if down, scroll back up
+    
     
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 div {
   position:relative;
 
@@ -255,10 +270,6 @@ div {
 
       @media only screen and (max-width: $break-mobile) {
         margin: 0.6rem auto;
-      }
-
-      &.project-header {
-
       }
 
       &.project-copy {
@@ -285,6 +296,14 @@ div {
       justify-content: space-between;
       align-items:center;
 
+      // testing sticky title
+      // position: sticky;
+      // top: 6rem;
+      // background-color: snow;
+      // z-index: 900;
+      // padding: 1rem 0;
+      // border-bottom: 1px dashed grey;
+
       @media only screen and (max-width: $break-mobile) {
         flex-direction: column;
       }
@@ -310,12 +329,23 @@ div {
     }
   }
   & > nav {
-    position:absolute;
+    // position:absolute;
     width: 100%;
-    top: -1.5rem;
+    // top: 0;
     text-align:center;
-
-    & > button {
+    position: sticky;
+      z-index: 999;
+      top: 3rem;
+      background-color:snow;
+      border-bottom: 1px dashed grey;
+    
+    // stick to top dashed line on mobile
+    // @media only screen and (max-width: $break-mobile) {
+    //   top:0;
+      
+    // }
+    & > button,
+    & > span.errormoji {
       position:absolute;
       
       &.next {
