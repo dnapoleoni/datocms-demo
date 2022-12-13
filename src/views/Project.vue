@@ -1,5 +1,5 @@
 <template>
-  <div v-if="data" v-touch:swipe="swipeHandler">
+  <div v-touch:swipe="swipeHandler">
     <nav aria-label="Project navigation" v-if="projectExists">
       <!-- prev project -->
       <button class="icon prev" :disabled="!(showNav && isPrev)" @click="nextPrevRecord(false)">
@@ -211,28 +211,29 @@ export default {
   },
 
   // quick-fetch slug on project nav
-  async beforeRouteUpdate(to, from, next) {
+  async beforeRouteEnter(to, from, next) {
 
-    // this.loading = true;
+    next(async vm => {
 
-    // check if different, just in case
-    if (this.slug != to.params.slug) {
+      if (to.name == 'project') {
+        // this.loading = true;
 
-      // save new slug
-      this.slug = to.params.slug;
-      
-      // nav to new record
-      await this.getProjectRecord(to.params.slug);
-    } else {
-      
-      // show error
-      this.projectExists = false;
-    }
+        // check if different, just in case
+        if (to.name == 'project' && from.params.slug != to.params.slug) {
 
-    next();
+          // save new slug
+          vm.slug = to.params.slug;
+
+          // nav to new record
+          await vm.getProjectRecord(to.params.slug);
+          } else {
+
+          // show error
+          vm.projectExists = false;
+        }
+      } 
+    });
   },
-
-  
   
   // on first mount of page
   async mounted() {
@@ -243,12 +244,6 @@ export default {
     
     // fetch record
     await this.getProjectRecord(this.slug);
-
-    //
-    // this.loading = false;
-
-    // if down, scroll back up
-    
     
   },
 };
@@ -374,6 +369,7 @@ div {
     }
   }
   & > main {
+    min-height: 100%;
     p {
       padding-bottom: 1rem;
 

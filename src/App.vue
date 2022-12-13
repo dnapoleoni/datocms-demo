@@ -3,8 +3,8 @@
         <section>
             <NavBar :data="data"></NavBar>
             <Header :data="data"></Header>
-            <transition name="fade">
-                <router-view ref="view"></router-view>
+            <transition name="fade" mode="out-in">
+                <router-view :key="$route.fullPath"></router-view>
             </transition>
             <Footer ></Footer>
         </section>
@@ -30,54 +30,6 @@ export default {
             data: null
         }
     },
-    methods: {
-        getPageValues() {
-            return {
-                a: 1,
-                b: 2
-            }
-        }
-    },
-    watch: {
-        // update meta on route change
-        '$route' (to) {
-            document.title = to.meta.title
-            // const sameTemplate = to.name == from.name;
-            // const projectTop = 260;
-            // const view = this.$refs.view;
-            // const project = view.$refs.project;
-            // const isProject = sameTemplate && project != undefined;
-            // if (isProject) {
-            //     const rect = project.getBoundingClientRect();
-            //     if (rect.top < projectTop / 2) {
-            //         window.scrollTo(0,projectTop);
-            //     }
-            // } else {
-            //     window.scrollTo({
-            //         top: 0,
-            //         left: 0, 
-            //         behaviour: 'smooth'
-            //     });
-            // }
-        }
-    },
-//     watch:{
-//     $route (to, from){
-//       const content = this.$refs.content;
-//       if (content) {
-//         const rect = content.getBoundingClientRect();
-//         const top = Math.ceil(rect.top);
-//         console.log(to, from)
-//         if (to.name == from.name) {
-//           if (top < 130) {
-//             window.scrollTo(0,260);
-//           }
-//         } else {
-//           window.scrollTo(0,0);
-//         }
-//       }
-//     }
-//   },
     async mounted() {
         // welcome
         console.log(`

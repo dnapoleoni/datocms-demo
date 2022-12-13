@@ -55,40 +55,7 @@ export default {
       this.isTel = !this.isTel;
       this.isEmail = false;
     }
-  },
-  // async mounted() {
-  //   this.data = await request({
-  //     query: `
-  //       {
-  //         profile {
-  //           name
-  //           profession
-  //           photo {
-  //             image: responsiveImage(imgixParams: { w: 300, h: 400, fit: crop, crop: faces, auto: format }) {
-  //               ...imageFields
-  //             }
-  //           }
-  //           location
-  //           emailAddress
-  //           phoneNumber
-  //         }
-  //       }
-  //       fragment imageFields on ResponsiveImage {
-  //           srcSet
-  //           webpSrcSet
-  //           sizes
-  //           src
-  //           width
-  //           height
-  //           aspectRatio
-  //           alt
-  //           title
-  //           bgColor
-  //           base64
-  //       }
-  //     `,
-  //   });
-  // },
+  }
 };
 </script>
 
