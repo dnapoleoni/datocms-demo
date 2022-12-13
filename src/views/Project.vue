@@ -1,5 +1,5 @@
 <template>
-  <div v-touch:swipe="swipeHandler">
+  <div v-if="data" v-touch:swipe="swipeHandler">
     <nav aria-label="Project navigation" v-if="projectExists">
       <!-- prev project -->
       <button class="icon prev" :disabled="!(showNav && isPrev)" @click="nextPrevRecord(false)">
